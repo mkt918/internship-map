@@ -101,6 +101,7 @@ select,input[type=text]{background:var(--surface2);color:var(--text);border:1px 
 .pchips{margin-top:2px;display:flex;gap:3px;flex-wrap:wrap}
 .pchip{padding:1px 5px;border-radius:3px;font-size:10px;background:var(--surface2)}
 .asgnd-to{font-size:10px;color:var(--m0);margin-top:2px}
+.station-hdr{font-size:11px;font-weight:700;color:var(--dim);padding:6px 4px 3px;margin-top:6px;border-bottom:1px solid var(--border)}.station-hdr:first-child{margin-top:0}.station-hdr span{font-weight:400;color:var(--border);margin-left:4px}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:transparent} ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -490,18 +491,23 @@ function renderStuList(){
   });
 
   // Sort
+  const gradeKey = s=>`${s['学年']}-${s['組']}-${String(s['番号']).padStart(3,'0')}`;
   list.sort((a,b)=>{
-    if(sortF==='grade') return `${a['学年']}-${a['組']}-${String(a['番号']).padStart(3,'0')}`.localeCompare(`${b['学年']}-${b['組']}-${String(b['番号']).padStart(3,'0')}`);
-    if(sortF==='station') return (a['最寄り駅']||'').localeCompare(b['最寄り駅']||'');
+    if(sortF==='grade') return gradeKey(a).localeCompare(gradeKey(b));
+    if(sortF==='station'){
+      const sa=a['最寄り駅']||a['市町']||'', sb=b['最寄り駅']||b['市町']||'';
+      if(sa!==sb) return sa.localeCompare(sb,'ja');
+      return gradeKey(a).localeCompare(gradeKey(b));
+    }
     // match order
     const ma = comp?matchLevel(a,comp):3, mb = comp?matchLevel(b,comp):3;
     if(ma!==mb) return ma-mb;
-    return `${a['学年']}-${a['組']}-${String(a['番号']).padStart(3,'0')}`.localeCompare(`${b['学年']}-${b['組']}-${String(b['番号']).padStart(3,'0')}`);
+    return gradeKey(a).localeCompare(gradeKey(b));
   });
 
   document.getElementById('stu-count').textContent = list.length;
 
-  el.innerHTML = list.map(s=>{
+  function stuCard(s){
     const isAsgnd = !!assign[s.id];
     const ml = comp ? matchLevel(s,comp) : -1;
     const mlCls = ml>=0 ? matchCls[ml] : '';
@@ -517,12 +523,29 @@ function renderStuList(){
         ${icon?`<span class="mbadge">${icon}</span>`:''}
       </div>
       <div class="sc-bot">
-        <div>${s['最寄り駅']||s['市町']||''}</div>
+        ${sortF!=='station'?`<div>${s['最寄り駅']||s['市町']||''}</div>`:''}
         <div class="pchips">${prefs.map(p=>`<span class="pchip">${p}</span>`).join('')}</div>
         ${aInfo}
       </div>
     </div>`;
-  }).join('');
+  }
+
+  if(sortF==='station'){
+    // Group by station with headers
+    let html='', lastSt='';
+    list.forEach(s=>{
+      const st=s['最寄り駅']||s['市町']||'不明';
+      if(st!==lastSt){
+        const cnt=list.filter(x=>(x['最寄り駅']||x['市町']||'不明')===st).length;
+        html+=`<div class="station-hdr">${st} <span>${cnt}名</span></div>`;
+        lastSt=st;
+      }
+      html+=stuCard(s);
+    });
+    el.innerHTML=html;
+  } else {
+    el.innerHTML=list.map(stuCard).join('');
+  }
 }
 
 // ─── Stats ───────────────────────────────────────────────────────────────────
