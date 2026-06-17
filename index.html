@@ -95,7 +95,7 @@
       <div class="count-badge" id="count-badge">0件</div>
     </div>
     <table id="student-table">
-      <thead><tr><th>学年</th><th>組</th><th>番号</th><th>性別</th><th>インターン企業名</th><th>日付</th></tr></thead>
+      <thead><tr><th>学年</th><th>組</th><th>番号</th><th>性別</th><th>インターン企業名</th><th>日付</th><th>最寄り駅</th></tr></thead>
       <tbody id="student-tbody"></tbody>
     </table>
   </div>
@@ -104,7 +104,37 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
-// ===== 事業所データ（座標込み） =====
+// ===== 駅座標 =====
+const stationCoords = {
+  "徳重名古屋芸大前駅": [35.2497, 136.8971],
+  "新那加駅":           [35.3960, 136.9210],
+  "木津用水駅":         [35.3285, 136.9024],
+  "布袋駅":             [35.3208, 136.8938],
+  "一宮駅":             [35.3038, 136.8030],
+  "大山寺駅":           [35.3325, 136.9078],
+  "犬山駅":             [35.3784, 136.9444],
+  "江南駅":             [35.3321, 136.8708],
+  "上小田井駅":         [35.2222, 136.8742],
+  "犬山口駅":           [35.3760, 136.9420],
+  "岩倉駅":             [35.2794, 136.8714],
+  "栢森駅":             [35.3580, 136.9178],
+  "尾張一宮駅":         [35.3096, 136.8006],
+  "羽黒駅":             [35.3592, 136.9509],
+  "名鉄名古屋駅":       [35.1814, 136.9066],
+  "木曽川駅":           [35.3373, 136.9048],
+  "下小田井駅":         [35.2017, 136.8758],
+  "新木曽川駅":         [35.3390, 136.8957],
+  "木曽川堤駅":         [35.3380, 136.9048],
+  "扶桑駅":             [35.3592, 136.9131],
+  "田県神社前駅":       [35.3195, 136.9234],
+  "富岡前駅":           [35.0948, 137.1545],
+  "木田駅":             [35.2486, 136.8218],
+  "平針駅":             [35.1189, 136.9685],
+  "石仏駅":             [35.2657, 136.8970],
+  "西春駅":             [35.2654, 136.8956],
+};
+
+// ===== 事業所データ =====
 const companies = [
   { no:"1A",  name:"株式会社デンケン",                        industry:"製造業",                  address:"愛知県犬山市大字羽黒字馬道7番地1",        lat:35.352470, lng:136.973373, contact:"0568-69-5011" },
   { no:"1B",  name:"東名化学工業株式会社　小牧工場",           industry:"製造業",                  address:"愛知県小牧市大草檀之上5410",              lat:35.301033, lng:137.002777, contact:"未定" },
@@ -157,165 +187,161 @@ const companies = [
   { no:"5Q",  name:"江南市立小鹿保育園",                       industry:"保育園",                  address:"愛知県江南市小杁町長者毛東1",             lat:35.363976, lng:136.874802, contact:"0587-57-8559" },
 ];
 
-// ===== 生徒データ =====
+// ===== 生徒データ（compNo・station付き） =====
 const students = [
-  {grade:1,cls:5,num:1,gender:"女",company:"江南市立宮田東保育園",date:"7/31(金)"},
-  {grade:1,cls:5,num:2,gender:"女",company:"江南市立古知野西保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:3,gender:"女",company:"江南市立古知野東保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:4,gender:"女",company:"江南市立布袋西保育園",date:"7/29(水)"},
-  {grade:1,cls:5,num:5,gender:"女",company:"九品寺幼稚園",date:"7/31(金)"},
-  {grade:1,cls:5,num:6,gender:"女",company:"リスパック株式会社 真空成形工場",date:"7/30(木)"},
-  {grade:1,cls:5,num:7,gender:"女",company:"株式会社扶桑守口食品",date:"7/28(火)"},
-  {grade:1,cls:5,num:8,gender:"男",company:"江南中央食品",date:"7/28(火)"},
-  {grade:1,cls:5,num:9,gender:"女",company:"きもの館なかね",date:"7/27(月)"},
-  {grade:1,cls:5,num:10,gender:"女",company:"きもの館なかね",date:"7/27(月)"},
-  {grade:1,cls:5,num:11,gender:"女",company:"ガレ・ドゥ・ワタナベ",date:"7/29(水)"},
-  {grade:1,cls:5,num:12,gender:"女",company:"江南市立草井保育園",date:"7/28(火)"},
-  {grade:1,cls:5,num:13,gender:"女",company:"ガレ・ドゥ・ワタナベ",date:"7/29(水)"},
-  {grade:1,cls:5,num:14,gender:"女",company:"江南市立草井保育園",date:"7/28(火)"},
-  {grade:1,cls:5,num:15,gender:"女",company:"株式会社扶桑守口食品",date:"7/28(火)"},
-  {grade:1,cls:5,num:16,gender:"女",company:"サンハウス食品株式会社",date:"7/28(火)"},
-  {grade:1,cls:5,num:17,gender:"女",company:"株式会社青山製作所　大口工場",date:"7/27(月)"},
-  {grade:1,cls:5,num:18,gender:"女",company:"江南市立古知野中保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:19,gender:"女",company:"サンハウス食品株式会社",date:"7/28(火)"},
-  {grade:1,cls:5,num:20,gender:"女",company:"大口屋木賀工場",date:"7/27(月)"},
-  {grade:1,cls:5,num:21,gender:"女",company:"大口屋木賀工場",date:"7/27(月)"},
-  {grade:1,cls:5,num:22,gender:"女",company:"江南市立布袋西保育園",date:"7/29(水)"},
-  {grade:1,cls:5,num:23,gender:"女",company:"江南市立古知野南保育園",date:"7/31(金)"},
-  {grade:1,cls:5,num:24,gender:"女",company:"グンゼ江南工場",date:"7/31(金)"},
-  {grade:1,cls:5,num:25,gender:"女",company:"江南市立宮田東保育園",date:"7/31(金)"},
-  {grade:1,cls:5,num:26,gender:"男",company:"江南市立宮田南保育園",date:"7/27(月)"},
-  {grade:1,cls:5,num:27,gender:"女",company:"榮美容室本店",date:"7/29(水)"},
-  {grade:1,cls:5,num:28,gender:"女",company:"江南市立布袋北保育園",date:"7/31(金)"},
-  {grade:1,cls:5,num:29,gender:"女",company:"大口屋木賀工場",date:"7/28(火)"},
-  {grade:1,cls:5,num:30,gender:"女",company:"株式会社扶桑守口食品",date:"7/27(月)"},
-  {grade:1,cls:5,num:31,gender:"女",company:"江南市立古知野東保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:32,gender:"女",company:"江南市立古知野西保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:33,gender:"女",company:"ガレ・ドゥ・ワタナベ",date:"7/30(木)"},
-  {grade:1,cls:5,num:34,gender:"女",company:"東罐興業株式会社　小牧工場",date:"7/31(金)"},
-  {grade:1,cls:5,num:35,gender:"男",company:"江南中央食品",date:"7/29(水)"},
-  {grade:1,cls:5,num:36,gender:"女",company:"江南市立小鹿保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:37,gender:"女",company:"大口屋木賀工場",date:"7/28(火)"},
-  {grade:1,cls:5,num:38,gender:"女",company:"ガレ・ドゥ・ワタナベ",date:"7/30(木)"},
-  {grade:1,cls:5,num:39,gender:"男",company:"江南市立古知野中保育園",date:"7/30(木)"},
-  {grade:1,cls:5,num:40,gender:"女",company:"株式会社扶桑守口食品",date:"7/27(月)"},
-  {grade:2,cls:1,num:1,gender:"女",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)"},
-  {grade:2,cls:1,num:2,gender:"女",company:"江南市立宮田東保育園",date:"8/25(火)"},
-  {grade:2,cls:1,num:3,gender:"男",company:"江南市立門弟山保育園",date:"8/24(月)"},
-  {grade:2,cls:1,num:4,gender:"女",company:"江南市立古知野北保育園",date:"8/28(金)"},
-  {grade:2,cls:1,num:5,gender:"男",company:"江南市立古知野東保育園",date:"8/24(月)"},
-  {grade:2,cls:1,num:6,gender:"女",company:"ドコモショップ江南店",date:"7/27(月)"},
-  {grade:2,cls:1,num:7,gender:"女",company:"江南郵便局",date:"8/25(火)"},
-  {grade:2,cls:1,num:8,gender:"女",company:"九品寺幼稚園",date:"8/26(水)"},
-  {grade:2,cls:1,num:9,gender:"女",company:"株式会社綿半ホームエイド江南店",date:"8/26(水)"},
-  {grade:2,cls:1,num:10,gender:"男",company:"TJ天気予報 7mm 北名古屋店",date:"8/25(火)"},
-  {grade:2,cls:1,num:11,gender:"女",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)"},
-  {grade:2,cls:1,num:12,gender:"女",company:"アメーテールアーム",date:"8/26(水)"},
-  {grade:2,cls:1,num:13,gender:"女",company:"ドコモショップ江南店",date:"7/27(月)"},
-  {grade:2,cls:1,num:14,gender:"男",company:"株式会社メイコン　本社",date:"7/31(金)"},
-  {grade:2,cls:1,num:15,gender:"女",company:"東名化学工業株式会社　小牧工場",date:"7/28(火)"},
-  {grade:2,cls:1,num:16,gender:"女",company:"江南市立布袋保育園",date:"8/24(月)"},
-  {grade:2,cls:1,num:17,gender:"女",company:"江南市立古知野南保育園",date:"7/31(金)"},
-  {grade:2,cls:1,num:18,gender:"女",company:"江南市立宮田南保育園",date:"8/25(火)"},
-  {grade:2,cls:1,num:19,gender:"男",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)"},
-  {grade:2,cls:1,num:20,gender:"女",company:"株式会社綿半ホームエイド江南店",date:"8/26(水)"},
-  {grade:2,cls:1,num:21,gender:"女",company:"株式会社綿半ホームエイド江南店",date:"7/29(水)"},
-  {grade:2,cls:1,num:22,gender:"男",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)"},
-  {grade:2,cls:1,num:23,gender:"女",company:"江南市立布袋北保育園",date:"8/28(金)"},
-  {grade:2,cls:1,num:24,gender:"女",company:"江南市立布袋東保育園",date:"8/26(水)"},
-  {grade:2,cls:1,num:25,gender:"女",company:"株式会社デンケン",date:"8/26(水)"},
-  {grade:2,cls:1,num:26,gender:"女",company:"サロンド榮",date:"8/26(水)"},
-  {grade:2,cls:1,num:27,gender:"女",company:"リスパック株式会社 真空成形工場",date:"7/30(木)"},
-  {grade:2,cls:1,num:28,gender:"女",company:"リスパック株式会社 真空成形工場",date:"7/30(木)"},
-  {grade:2,cls:1,num:29,gender:"男",company:"グンゼ江南工場",date:"7/31(金)"},
-  {grade:2,cls:1,num:30,gender:"女",company:"江南市立宮田保育園",date:"8/27(木)"},
-  {grade:2,cls:1,num:31,gender:"女",company:"TJ天気予報 7mm 北名古屋店",date:"8/25(火)"},
-  {grade:2,cls:1,num:32,gender:"男",company:"グンゼ江南工場",date:"7/31(金)"},
-  {grade:2,cls:1,num:33,gender:"女",company:"美容室ISA",date:"8/24(月)"},
-  {grade:2,cls:1,num:34,gender:"男",company:"きもの館なかね",date:"8/24(月)"},
-  {grade:2,cls:1,num:35,gender:"男",company:"きもの館なかね",date:"8/24(月)"},
-  {grade:2,cls:1,num:36,gender:"女",company:"江南市立藤里保育園",date:"7/27(月)"},
-  {grade:2,cls:2,num:1,gender:"男",company:"福玉米粒麦株式会社",date:"8/24(月)"},
-  {grade:2,cls:2,num:2,gender:"男",company:"株式会社愛知イエローハット　一宮店",date:"8/25(火)"},
-  {grade:2,cls:2,num:3,gender:"男",company:"江南郵便局",date:"8/25(火)"},
-  {grade:2,cls:2,num:4,gender:"男",company:"株式会社綿半ホームエイド江南店",date:"7/29(水)"},
-  {grade:2,cls:2,num:5,gender:"男",company:"江南郵便局",date:"8/25(火)"},
-  {grade:2,cls:2,num:6,gender:"女",company:"株式会社メイコン　本社",date:"7/31(金)"},
-  {grade:2,cls:2,num:7,gender:"女",company:"株式会社デンケン",date:"8/26(水)"},
-  {grade:2,cls:2,num:8,gender:"男",company:"江南市立小鹿保育園",date:"8/25(火)"},
-  {grade:2,cls:2,num:9,gender:"女",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)"},
-  {grade:2,cls:2,num:10,gender:"女",company:"江南市立布袋東保育園",date:"8/26(水)"},
-  {grade:2,cls:2,num:11,gender:"女",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)"},
-  {grade:2,cls:2,num:12,gender:"女",company:"江南市立布袋保育園",date:"8/24(月)"},
-  {grade:2,cls:2,num:13,gender:"女",company:"江南市立藤里保育園",date:"7/28(火)"},
-  {grade:2,cls:2,num:14,gender:"女",company:"株式会社東海理化電機製作所",date:"8/25(火)"},
-  {grade:2,cls:2,num:15,gender:"男",company:"福玉ロジスティクス株式会社　大口センター",date:"7/30(木)"},
-  {grade:2,cls:2,num:16,gender:"女",company:"株式会社愛知イエローハット　一宮店",date:"8/27(木)"},
-  {grade:2,cls:2,num:17,gender:"女",company:"FUSION",date:"8/27(木)"},
-  {grade:2,cls:2,num:18,gender:"男",company:"株式会社愛知イエローハット　一宮店",date:"8/25(火)"},
-  {grade:2,cls:2,num:19,gender:"女",company:"江南市立宮田保育園",date:"8/27(木)"},
-  {grade:2,cls:2,num:20,gender:"女",company:"江南市立藤里保育園",date:"7/29(水)"},
-  {grade:2,cls:3,num:1,gender:"女",company:"江南市立小鹿保育園",date:"8/24(月)"},
-  {grade:2,cls:3,num:2,gender:"男",company:"江南市立古知野北保育園",date:"8/28(金)"},
-  {grade:2,cls:3,num:3,gender:"男",company:"江南市立門弟山保育園",date:"8/24(月)"},
-  {grade:2,cls:3,num:4,gender:"男",company:"江南市立古知野中保育園",date:"7/30(木)"},
-  {grade:2,cls:3,num:5,gender:"男",company:"アイカテック建材株式会社名古屋工場",date:"8/26(水)"},
-  {grade:2,cls:3,num:6,gender:"",company:"江南市立布袋東保育園",date:"8/27(木)"},
-  {grade:2,cls:3,num:7,gender:"女",company:"株式会社愛知イエローハット　一宮店",date:"8/27(木)"},
-  {grade:2,cls:3,num:8,gender:"女",company:"東名化学工業株式会社　小牧工場",date:"7/31(金)"},
-  {grade:2,cls:3,num:9,gender:"男",company:"江南市立古知野北保育園",date:"8/28(金)"},
-  {grade:2,cls:3,num:10,gender:"女",company:"株式会社青山製作所　大口工場",date:"7/27(月)"},
-  {grade:2,cls:3,num:11,gender:"女",company:"リスパック株式会社 真空成形工場",date:"7/30(木)"},
-  {grade:2,cls:3,num:12,gender:"男",company:"福玉ロジスティクス株式会社　大口センター",date:"7/30(木)"},
-  {grade:2,cls:3,num:13,gender:"男",company:"株式会社東海理化電機製作所",date:"8/25(火)"},
-  {grade:2,cls:3,num:14,gender:"女",company:"株式会社デンケン",date:"8/27(木)"},
-  {grade:2,cls:3,num:15,gender:"男",company:"東名化学工業株式会社　小牧工場",date:"7/31(金)"},
-  {grade:2,cls:3,num:16,gender:"男",company:"株式会社愛知イエローハット　一宮店",date:"8/26(水)"},
-  {grade:2,cls:3,num:17,gender:"女",company:"リスパック株式会社 真空成形工場",date:"7/30(木)"},
-  {grade:2,cls:3,num:18,gender:"女",company:"美容室ISA",date:"8/24(月)"},
-  {grade:2,cls:3,num:19,gender:"男",company:"アイカテック建材株式会社名古屋工場",date:"8/26(水)"},
-  {grade:2,cls:4,num:1,gender:"女",company:"GARN（ガルン）　モゾワンダーシティ店",date:"7/27(月)"},
-  {grade:2,cls:4,num:2,gender:"女",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)"},
-  {grade:2,cls:4,num:3,gender:"女",company:"株式会社青山製作所　大口工場",date:"8/25(火)"},
-  {grade:2,cls:4,num:4,gender:"女",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)"},
-  {grade:2,cls:4,num:5,gender:"女",company:"江南市立古知野東保育園",date:"8/24(月)"},
-  {grade:2,cls:4,num:6,gender:"女",company:"江南市立宮田南保育園",date:"8/25(火)"},
-  {grade:2,cls:4,num:7,gender:"女",company:"江南市立藤里保育園",date:"7/30(木)"},
-  {grade:2,cls:4,num:8,gender:"女",company:"江南市立古知野西保育園",date:"8/24(月)"},
-  {grade:2,cls:4,num:9,gender:"男",company:"九品寺幼稚園",date:"8/26(水)"},
-  {grade:2,cls:4,num:10,gender:"女",company:"アメーテールアーム",date:"8/26(水)"},
-  {grade:2,cls:4,num:11,gender:"女",company:"GARN（ガルン）　モゾワンダーシティ店",date:"7/29(水)"},
-  {grade:2,cls:4,num:12,gender:"男",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)"},
-  {grade:2,cls:4,num:13,gender:"女",company:"株式会社青山製作所　大口工場",date:"8/25(火)"},
-  {grade:2,cls:4,num:14,gender:"女",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)"},
-  {grade:2,cls:4,num:15,gender:"女",company:"株式会社林商店",date:"8/27(木)"},
-  {grade:2,cls:4,num:16,gender:"男",company:"株式会社デンケン",date:"8/27(木)"},
-  {grade:2,cls:4,num:17,gender:"男",company:"アイカテック建材株式会社名古屋工場",date:"8/26(水)"},
-  {grade:2,cls:4,num:18,gender:"女",company:"福玉米粒麦株式会社",date:"8/24(月)"},
-  {grade:2,cls:4,num:19,gender:"女",company:"株式会社林商店",date:"8/27(木)"},
-  {grade:2,cls:4,num:20,gender:"女",company:"東名化学工業株式会社　小牧工場",date:"7/28(火)"},
-  {grade:2,cls:4,num:21,gender:"女",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)"},
-  {grade:2,cls:4,num:22,gender:"女",company:"東罐興業株式会社　小牧工場",date:"7/31(金)"},
-  {grade:2,cls:4,num:23,gender:"女",company:"江南市立布袋東保育園",date:"8/27(木)"},
-  {grade:2,cls:4,num:24,gender:"男",company:"株式会社メイコン　本社",date:"7/31(金)"},
-  {grade:2,cls:4,num:25,gender:"男",company:"福玉ロジスティクス株式会社　大口センター",date:"7/31(金)"},
-  {grade:2,cls:4,num:26,gender:"男",company:"江南市立古知野東保育園",date:"8/24(月)"},
-  {grade:2,cls:4,num:27,gender:"女",company:"江南市立小鹿保育園",date:"8/24(月)"},
-  {grade:2,cls:4,num:28,gender:"女",company:"株式会社愛知イエローハット　一宮店",date:"8/26(水)"},
-  {grade:2,cls:4,num:29,gender:"女",company:"株式会社東海理化電機製作所",date:"8/25(火)"},
+  {grade:1,cls:5,num:1,gender:"女",compNo:"5E",company:"江南市立宮田東保育園",date:"7/31(金)",station:"扶桑駅"},
+  {grade:1,cls:5,num:2,gender:"女",compNo:"5B",company:"江南市立古知野西保育園",date:"7/30(木)",station:"江南駅"},
+  {grade:1,cls:5,num:3,gender:"女",compNo:"5K",company:"江南市立古知野東保育園",date:"7/30(木)",station:"尾張一宮駅"},
+  {grade:1,cls:5,num:4,gender:"女",compNo:"5C",company:"江南市立布袋西保育園",date:"7/29(水)",station:"布袋駅"},
+  {grade:1,cls:5,num:5,gender:"女",compNo:"5A",company:"九品寺幼稚園",date:"7/31(金)",station:"一宮駅"},
+  {grade:1,cls:5,num:6,gender:"女",compNo:"1H",company:"リスパック株式会社 真空成形工場",date:"7/30(木)",station:"犬山駅"},
+  {grade:1,cls:5,num:7,gender:"女",compNo:"2C",company:"株式会社扶桑守口食品",date:"7/28(火)",station:"江南駅"},
+  {grade:1,cls:5,num:8,gender:"男",compNo:"42A",company:"江南中央食品",date:"7/28(火)",station:"江南駅"},
+  {grade:1,cls:5,num:9,gender:"女",compNo:"43B",company:"きもの館なかね",date:"7/27(月)",station:"上小田井駅"},
+  {grade:1,cls:5,num:10,gender:"女",compNo:"43B",company:"きもの館なかね",date:"7/27(月)",station:""},
+  {grade:1,cls:5,num:11,gender:"女",compNo:"42B",company:"ガレ・ドゥ・ワタナベ",date:"7/29(水)",station:"江南駅"},
+  {grade:1,cls:5,num:12,gender:"女",compNo:"5F",company:"江南市立草井保育園",date:"7/28(火)",station:"扶桑駅"},
+  {grade:1,cls:5,num:13,gender:"女",compNo:"42B",company:"ガレ・ドゥ・ワタナベ",date:"7/29(水)",station:"上小田井駅"},
+  {grade:1,cls:5,num:14,gender:"女",compNo:"5F",company:"江南市立草井保育園",date:"7/28(火)",station:"扶桑駅"},
+  {grade:1,cls:5,num:15,gender:"女",compNo:"2C",company:"株式会社扶桑守口食品",date:"7/28(火)",station:"木田駅"},
+  {grade:1,cls:5,num:16,gender:"女",compNo:"2B",company:"サンハウス食品株式会社",date:"7/28(火)",station:"石仏駅"},
+  {grade:1,cls:5,num:17,gender:"女",compNo:"1G",company:"株式会社青山製作所　大口工場",date:"7/27(月)",station:"布袋駅"},
+  {grade:1,cls:5,num:18,gender:"女",compNo:"5G",company:"江南市立古知野中保育園",date:"7/30(木)",station:"扶桑駅"},
+  {grade:1,cls:5,num:19,gender:"女",compNo:"2B",company:"サンハウス食品株式会社",date:"7/28(火)",station:"木津用水駅"},
+  {grade:1,cls:5,num:20,gender:"女",compNo:"2D",company:"大口屋木賀工場",date:"7/27(月)",station:"徳重名古屋芸大前駅"},
+  {grade:1,cls:5,num:21,gender:"女",compNo:"2D",company:"大口屋木賀工場",date:"7/27(月)",station:"犬山口駅"},
+  {grade:1,cls:5,num:22,gender:"女",compNo:"5C",company:"江南市立布袋西保育園",date:"7/29(水)",station:"江南駅"},
+  {grade:1,cls:5,num:23,gender:"女",compNo:"5I",company:"江南市立古知野南保育園",date:"7/31(金)",station:"江南駅"},
+  {grade:1,cls:5,num:24,gender:"女",compNo:"1K",company:"グンゼ江南工場",date:"7/31(金)",station:"一宮駅"},
+  {grade:1,cls:5,num:25,gender:"女",compNo:"5E",company:"江南市立宮田東保育園",date:"7/31(金)",station:"西春駅"},
+  {grade:1,cls:5,num:26,gender:"男",compNo:"5M",company:"江南市立宮田南保育園",date:"7/27(月)",station:"岩倉駅"},
+  {grade:1,cls:5,num:27,gender:"女",compNo:"44A1",company:"榮美容室本店",date:"7/29(水)",station:"布袋駅"},
+  {grade:1,cls:5,num:28,gender:"女",compNo:"5J",company:"江南市立布袋北保育園",date:"7/31(金)",station:"江南駅"},
+  {grade:1,cls:5,num:29,gender:"女",compNo:"2D",company:"大口屋木賀工場",date:"7/28(火)",station:"扶桑駅"},
+  {grade:1,cls:5,num:30,gender:"女",compNo:"2C",company:"株式会社扶桑守口食品",date:"7/27(月)",station:"一宮駅"},
+  {grade:1,cls:5,num:31,gender:"女",compNo:"5K",company:"江南市立古知野東保育園",date:"7/30(木)",station:"徳重名古屋芸大前駅"},
+  {grade:1,cls:5,num:32,gender:"女",compNo:"5B",company:"江南市立古知野西保育園",date:"7/30(木)",station:"木津用水駅"},
+  {grade:1,cls:5,num:33,gender:"女",compNo:"42B",company:"ガレ・ドゥ・ワタナベ",date:"7/30(木)",station:"栢森駅"},
+  {grade:1,cls:5,num:34,gender:"女",compNo:"1C",company:"東罐興業株式会社　小牧工場",date:"7/31(金)",station:"岩倉駅"},
+  {grade:1,cls:5,num:35,gender:"男",compNo:"42A",company:"江南中央食品",date:"7/29(水)",station:"名鉄名古屋駅"},
+  {grade:1,cls:5,num:36,gender:"女",compNo:"5Q",company:"江南市立小鹿保育園",date:"7/30(木)",station:"平針駅"},
+  {grade:1,cls:5,num:37,gender:"女",compNo:"2D",company:"大口屋木賀工場",date:"7/28(火)",station:"一宮駅"},
+  {grade:1,cls:5,num:38,gender:"女",compNo:"42B",company:"ガレ・ドゥ・ワタナベ",date:"7/30(木)",station:"栢森駅"},
+  {grade:1,cls:5,num:39,gender:"男",compNo:"5G",company:"江南市立古知野中保育園",date:"7/30(木)",station:"西春駅"},
+  {grade:1,cls:5,num:40,gender:"女",compNo:"2C",company:"株式会社扶桑守口食品",date:"7/27(月)",station:"江南駅"},
+  {grade:2,cls:1,num:1,gender:"女",compNo:"3B",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)",station:"布袋駅"},
+  {grade:2,cls:1,num:2,gender:"女",compNo:"5E",company:"江南市立宮田東保育園",date:"8/25(火)",station:"上小田井駅"},
+  {grade:2,cls:1,num:3,gender:"男",compNo:"5L",company:"江南市立門弟山保育園",date:"8/24(月)",station:"岩倉駅"},
+  {grade:2,cls:1,num:4,gender:"女",compNo:"5D",company:"江南市立古知野北保育園",date:"8/28(金)",station:"木曽川駅"},
+  {grade:2,cls:1,num:5,gender:"男",compNo:"5K",company:"江南市立古知野東保育園",date:"8/24(月)",station:"布袋駅"},
+  {grade:2,cls:1,num:6,gender:"女",compNo:"41B",company:"ドコモショップ江南店",date:"7/27(月)",station:"江南駅"},
+  {grade:2,cls:1,num:7,gender:"女",compNo:"41C",company:"江南郵便局",date:"8/25(火)",station:"江南駅"},
+  {grade:2,cls:1,num:8,gender:"女",compNo:"5A",company:"九品寺幼稚園",date:"8/26(水)",station:"一宮駅"},
+  {grade:2,cls:1,num:9,gender:"女",compNo:"41E",company:"株式会社綿半ホームエイド江南店",date:"8/26(水)",station:"江南駅"},
+  {grade:2,cls:1,num:10,gender:"男",compNo:"44C",company:"TJ天気予報 7mm 北名古屋店",date:"8/25(火)",station:"上小田井駅"},
+  {grade:2,cls:1,num:11,gender:"女",compNo:"1D",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)",station:"西春駅"},
+  {grade:2,cls:1,num:12,gender:"女",compNo:"44D",company:"アメーテールアーム",date:"8/26(水)",station:"西春駅"},
+  {grade:2,cls:1,num:13,gender:"女",compNo:"41B",company:"ドコモショップ江南店",date:"7/27(月)",station:"江南駅"},
+  {grade:2,cls:1,num:14,gender:"男",compNo:"3A",company:"株式会社メイコン　本社",date:"7/31(金)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:1,num:15,gender:"女",compNo:"1B",company:"東名化学工業株式会社　小牧工場",date:"7/28(火)",station:"江南駅"},
+  {grade:2,cls:1,num:16,gender:"女",compNo:"5H",company:"江南市立布袋保育園",date:"8/24(月)",station:"一宮駅"},
+  {grade:2,cls:1,num:17,gender:"女",compNo:"5I",company:"江南市立古知野南保育園",date:"7/31(金)",station:"一宮駅"},
+  {grade:2,cls:1,num:18,gender:"女",compNo:"5M",company:"江南市立宮田南保育園",date:"8/25(火)",station:"西春駅"},
+  {grade:2,cls:1,num:19,gender:"男",compNo:"3B",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)",station:"栢森駅"},
+  {grade:2,cls:1,num:20,gender:"女",compNo:"41E",company:"株式会社綿半ホームエイド江南店",date:"8/26(水)",station:"江南駅"},
+  {grade:2,cls:1,num:21,gender:"女",compNo:"41E",company:"株式会社綿半ホームエイド江南店",date:"7/29(水)",station:"江南駅"},
+  {grade:2,cls:1,num:22,gender:"男",compNo:"3D",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)",station:"岩倉駅"},
+  {grade:2,cls:1,num:23,gender:"女",compNo:"5J",company:"江南市立布袋北保育園",date:"8/28(金)",station:"江南駅"},
+  {grade:2,cls:1,num:24,gender:"女",compNo:"5N",company:"江南市立布袋東保育園",date:"8/26(水)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:1,num:25,gender:"女",compNo:"1A",company:"株式会社デンケン",date:"8/26(水)",station:"布袋駅"},
+  {grade:2,cls:1,num:26,gender:"女",compNo:"44A2",company:"サロンド榮",date:"8/26(水)",station:"江南駅"},
+  {grade:2,cls:1,num:27,gender:"女",compNo:"1H",company:"リスパック株式会社 真空成形工場",date:"7/30(木)",station:"犬山駅"},
+  {grade:2,cls:1,num:28,gender:"女",compNo:"1H",company:"リスパック株式会社 真空成形工場",date:"7/30(木)",station:"西春駅"},
+  {grade:2,cls:1,num:29,gender:"男",compNo:"1K",company:"グンゼ江南工場",date:"7/31(金)",station:"布袋駅"},
+  {grade:2,cls:1,num:30,gender:"女",compNo:"5O",company:"江南市立宮田保育園",date:"8/27(木)",station:"江南駅"},
+  {grade:2,cls:1,num:31,gender:"女",compNo:"44C",company:"TJ天気予報 7mm 北名古屋店",date:"8/25(火)",station:"西春駅"},
+  {grade:2,cls:1,num:32,gender:"男",compNo:"1K",company:"グンゼ江南工場",date:"7/31(金)",station:"江南駅"},
+  {grade:2,cls:1,num:33,gender:"女",compNo:"44B",company:"美容室ISA",date:"8/24(月)",station:"西春駅"},
+  {grade:2,cls:1,num:34,gender:"男",compNo:"43B",company:"きもの館なかね",date:"8/24(月)",station:"木曽川駅"},
+  {grade:2,cls:1,num:35,gender:"男",compNo:"43B",company:"きもの館なかね",date:"8/24(月)",station:"石仏駅"},
+  {grade:2,cls:1,num:36,gender:"女",compNo:"5P",company:"江南市立藤里保育園",date:"7/27(月)",station:"上小田井駅"},
+  {grade:2,cls:2,num:1,gender:"男",compNo:"2A",company:"福玉米粒麦株式会社",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:2,num:2,gender:"男",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/25(火)",station:"石仏駅"},
+  {grade:2,cls:2,num:3,gender:"男",compNo:"41C",company:"江南郵便局",date:"8/25(火)",station:"上小田井駅"},
+  {grade:2,cls:2,num:4,gender:"男",compNo:"41E",company:"株式会社綿半ホームエイド江南店",date:"7/29(水)",station:""},
+  {grade:2,cls:2,num:5,gender:"男",compNo:"41C",company:"江南郵便局",date:"8/25(火)",station:"江南駅"},
+  {grade:2,cls:2,num:6,gender:"女",compNo:"3A",company:"株式会社メイコン　本社",date:"7/31(金)",station:"羽黒駅"},
+  {grade:2,cls:2,num:7,gender:"女",compNo:"1A",company:"株式会社デンケン",date:"8/26(水)",station:"一宮駅"},
+  {grade:2,cls:2,num:8,gender:"男",compNo:"5Q",company:"江南市立小鹿保育園",date:"8/25(火)",station:"一宮駅"},
+  {grade:2,cls:2,num:9,gender:"女",compNo:"3D",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)",station:"新木曽川駅"},
+  {grade:2,cls:2,num:10,gender:"女",compNo:"5N",company:"江南市立布袋東保育園",date:"8/26(水)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:2,num:11,gender:"女",compNo:"3D",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:2,num:12,gender:"女",compNo:"5H",company:"江南市立布袋保育園",date:"8/24(月)",station:"木津用水駅"},
+  {grade:2,cls:2,num:13,gender:"女",compNo:"5P",company:"江南市立藤里保育園",date:"7/28(火)",station:"江南駅"},
+  {grade:2,cls:2,num:14,gender:"女",compNo:"1I",company:"株式会社東海理化電機製作所",date:"8/25(火)",station:"江南駅"},
+  {grade:2,cls:2,num:15,gender:"男",compNo:"3C",company:"福玉ロジスティクス株式会社　大口センター",date:"7/30(木)",station:"西春駅"},
+  {grade:2,cls:2,num:16,gender:"女",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/27(木)",station:"木曽川駅"},
+  {grade:2,cls:2,num:17,gender:"女",compNo:"44A3",company:"FUSION",date:"8/27(木)",station:"江南駅"},
+  {grade:2,cls:2,num:18,gender:"男",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/25(火)",station:"森駅"},
+  {grade:2,cls:2,num:19,gender:"女",compNo:"5O",company:"江南市立宮田保育園",date:"8/27(木)",station:"犬山口駅"},
+  {grade:2,cls:2,num:20,gender:"女",compNo:"5P",company:"江南市立藤里保育園",date:"7/29(水)",station:"上小田井駅"},
+  {grade:2,cls:3,num:1,gender:"女",compNo:"5Q",company:"江南市立小鹿保育園",date:"8/24(月)",station:"西春駅"},
+  {grade:2,cls:3,num:2,gender:"男",compNo:"5D",company:"江南市立古知野北保育園",date:"8/28(金)",station:"江南駅"},
+  {grade:2,cls:3,num:3,gender:"男",compNo:"5L",company:"江南市立門弟山保育園",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:3,num:4,gender:"男",compNo:"5G",company:"江南市立古知野中保育園",date:"7/30(木)",station:"江南駅"},
+  {grade:2,cls:3,num:5,gender:"男",compNo:"1E",company:"アイカテック建材株式会社名古屋工場　※安全靴貸出のためサイズを要連絡",date:"8/26(水)",station:"一宮駅"},
+  {grade:2,cls:3,num:6,gender:"",compNo:"5N",company:"江南市立布袋東保育園",date:"8/27(木)",station:"犬山駅"},
+  {grade:2,cls:3,num:7,gender:"女",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/27(木)",station:"江南駅"},
+  {grade:2,cls:3,num:8,gender:"女",compNo:"1B",company:"東名化学工業株式会社　小牧工場",date:"7/31(金)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:3,num:9,gender:"男",compNo:"5D",company:"江南市立古知野北保育園",date:"8/28(金)",station:"石仏駅"},
+  {grade:2,cls:3,num:10,gender:"女",compNo:"1G",company:"株式会社青山製作所　大口工場",date:"7/27(月)",station:"木曽川堤駅"},
+  {grade:2,cls:3,num:11,gender:"女",compNo:"1H",company:"リスパック株式会社 真空成形工場",date:"7/30(木)",station:"江南駅"},
+  {grade:2,cls:3,num:12,gender:"男",compNo:"3C",company:"福玉ロジスティクス株式会社　大口センター",date:"7/30(木)",station:"布袋駅"},
+  {grade:2,cls:3,num:13,gender:"男",compNo:"1I",company:"株式会社東海理化電機製作所",date:"8/25(火)",station:"江南駅"},
+  {grade:2,cls:3,num:14,gender:"女",compNo:"1A",company:"株式会社デンケン",date:"8/27(木)",station:"江南駅"},
+  {grade:2,cls:3,num:15,gender:"男",compNo:"1B",company:"東名化学工業株式会社　小牧工場",date:"7/31(金)",station:"栢森駅"},
+  {grade:2,cls:3,num:16,gender:"男",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/26(水)",station:"富岡前駅"},
+  {grade:2,cls:3,num:17,gender:"女",compNo:"1H",company:"リスパック株式会社 真空成形工場",date:"7/30(木)",station:"江南駅"},
+  {grade:2,cls:3,num:18,gender:"女",compNo:"44B",company:"美容室ISA",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:3,num:19,gender:"男",compNo:"1E",company:"アイカテック建材株式会社名古屋工場　※安全靴貸出のためサイズを要連絡",date:"8/26(水)",station:"下小田井駅"},
+  {grade:2,cls:4,num:1,gender:"女",compNo:"43A",company:"GARN（ガルン）　モゾワンダーシティ店",date:"7/27(月)",station:"西春駅"},
+  {grade:2,cls:4,num:2,gender:"女",compNo:"1D",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:4,num:3,gender:"女",compNo:"1G",company:"株式会社青山製作所　大口工場",date:"8/25(火)",station:"布袋駅"},
+  {grade:2,cls:4,num:4,gender:"女",compNo:"1D",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)",station:"西春駅"},
+  {grade:2,cls:4,num:5,gender:"女",compNo:"5K",company:"江南市立古知野東保育園",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:4,num:6,gender:"女",compNo:"5M",company:"江南市立宮田南保育園",date:"8/25(火)",station:"扶桑駅"},
+  {grade:2,cls:4,num:7,gender:"女",compNo:"5P",company:"江南市立藤里保育園",date:"7/30(木)",station:"田県神社前駅"},
+  {grade:2,cls:4,num:8,gender:"女",compNo:"5B",company:"江南市立古知野西保育園",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:4,num:9,gender:"男",compNo:"5A",company:"九品寺幼稚園",date:"8/26(水)",station:"木曽川駅"},
+  {grade:2,cls:4,num:10,gender:"女",compNo:"44D",company:"アメーテールアーム",date:"8/26(水)",station:"犬山駅"},
+  {grade:2,cls:4,num:11,gender:"女",compNo:"43A",company:"GARN（ガルン）　モゾワンダーシティ店",date:"7/29(水)",station:"扶桑駅"},
+  {grade:2,cls:4,num:12,gender:"男",compNo:"3D",company:"ＮＸキャッシュ・ロジスティクス株式会社　中部支店",date:"7/30(木)",station:"田県神社前駅"},
+  {grade:2,cls:4,num:13,gender:"女",compNo:"1G",company:"株式会社青山製作所　大口工場",date:"8/25(火)",station:"栢森駅"},
+  {grade:2,cls:4,num:14,gender:"女",compNo:"3B",company:"キムラユニティー株式会社　犬山工場（調整中）",date:"7/29(水)",station:"江南駅"},
+  {grade:2,cls:4,num:15,gender:"女",compNo:"1J",company:"株式会社林商店",date:"8/27(木)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:4,num:16,gender:"男",compNo:"1A",company:"株式会社デンケン",date:"8/27(木)",station:"江南駅"},
+  {grade:2,cls:4,num:17,gender:"男",compNo:"1E",company:"アイカテック建材株式会社名古屋工場　※安全靴貸出のためサイズを要連絡",date:"8/26(水)",station:"栢森駅"},
+  {grade:2,cls:4,num:18,gender:"女",compNo:"2A",company:"福玉米粒麦株式会社",date:"8/24(月)",station:"一宮駅"},
+  {grade:2,cls:4,num:19,gender:"女",compNo:"1J",company:"株式会社林商店",date:"8/27(木)",station:"西春駅"},
+  {grade:2,cls:4,num:20,gender:"女",compNo:"1B",company:"東名化学工業株式会社　小牧工場",date:"7/28(火)",station:"江南駅"},
+  {grade:2,cls:4,num:21,gender:"女",compNo:"1D",company:"中央可鍛工業株式会社　日進工場",date:"7/29(水)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:4,num:22,gender:"女",compNo:"1C",company:"東罐興業株式会社　小牧工場",date:"7/31(金)",station:"江南駅"},
+  {grade:2,cls:4,num:23,gender:"女",compNo:"5N",company:"江南市立布袋東保育園",date:"8/27(木)",station:"新那加駅"},
+  {grade:2,cls:4,num:24,gender:"男",compNo:"3A",company:"株式会社メイコン　本社",date:"7/31(金)",station:"布袋駅"},
+  {grade:2,cls:4,num:25,gender:"男",compNo:"3C",company:"福玉ロジスティクス株式会社　大口センター",date:"7/31(金)",station:"大山寺駅"},
+  {grade:2,cls:4,num:26,gender:"男",compNo:"5K",company:"江南市立古知野東保育園",date:"8/24(月)",station:"徳重名古屋芸大前駅"},
+  {grade:2,cls:4,num:27,gender:"女",compNo:"5Q",company:"江南市立小鹿保育園",date:"8/24(月)",station:"江南駅"},
+  {grade:2,cls:4,num:28,gender:"女",compNo:"41A",company:"株式会社愛知イエローハット　一宮店",date:"8/26(水)",station:"栢森駅"},
+  {grade:2,cls:4,num:29,gender:"女",compNo:"1I",company:"株式会社東海理化電機製作所",date:"8/25(火)",station:"江南駅"},
 ];
 
-// 企業名で生徒を紐付け（部分一致）
-function matchStudents(company) {
-  const cn = company.name.replace(/[　\s]/g,'').substring(0,10);
-  return students.filter(s => {
-    const sn = s.company.replace(/[　\s]/g,'');
-    return sn.includes(cn.substring(0,8)) || cn.includes(sn.substring(0,8));
-  });
+// 企業Noで生徒を紐付け
+function matchStudents(no) {
+  return students.filter(s => s.compNo === no);
 }
 
 function getColor(industry) {
-  if (industry.includes('製造')) return '#e53935';
+  if (industry.includes('製造') || industry.includes('メーカー') || industry.includes('衣料')) return '#e53935';
   if (industry.includes('保育') || industry.includes('幼稚') || industry.includes('福祉') || industry.includes('保育士')) return '#43a047';
   if (industry.includes('物流')) return '#fb8c00';
   if (industry.includes('食品') || industry.includes('飲食') || industry.includes('漬物') || industry.includes('和菓子')) return '#ff7043';
@@ -325,8 +351,72 @@ function getColor(industry) {
 
 // ===== Map =====
 let map;
-const markerData = []; // { marker, dates: Set, count }
+const markerData = [];
 let currentDateFilter = '';
+
+// 通学ルート表示用レイヤー（クリックごとにクリア）
+let routeLayer = null;
+
+function clearRoutes() {
+  if (routeLayer) {
+    routeLayer.clearLayers();
+  }
+}
+
+function showRoutes(company, assigned) {
+  if (!routeLayer) routeLayer = L.layerGroup().addTo(map);
+  routeLayer.clearLayers();
+
+  // 駅ごとに集計
+  const stationMap = {};
+  assigned.forEach(s => {
+    if (!s.station) return;
+    const coords = stationCoords[s.station];
+    if (!coords) return;
+    if (!stationMap[s.station]) stationMap[s.station] = { coords, students: [] };
+    stationMap[s.station].students.push(s);
+  });
+
+  const compLatLng = [company.lat, company.lng];
+
+  Object.entries(stationMap).forEach(([stName, info]) => {
+    const stLatLng = info.coords;
+    const count = info.students.length;
+
+    // 直線
+    L.polyline([stLatLng, compLatLng], {
+      color: '#ff6f00',
+      weight: 2,
+      opacity: 0.7,
+      dashArray: '6 4'
+    }).addTo(routeLayer);
+
+    // 駅マーカー（菱形っぽい正方形アイコン）
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width:${10 + count * 3}px;height:${10 + count * 3}px;
+        background:#ff6f00;border:2px solid #fff;
+        border-radius:3px;transform:rotate(45deg);
+        box-shadow:0 1px 4px rgba(0,0,0,.4);
+      "></div>`,
+      iconAnchor: [(10 + count * 3) / 2, (10 + count * 3) / 2]
+    });
+    const stMarker = L.marker(stLatLng, { icon }).addTo(routeLayer);
+
+    const rows = info.students.map(s =>
+      `<tr><td>${s.grade}年${s.cls}組${String(s.num).padStart(2,'0')}番</td><td>${s.gender||'-'}</td><td>${s.date}</td></tr>`
+    ).join('');
+    stMarker.bindTooltip(
+      `<b>🚉 ${stName}</b>（${count}名）<br>
+       <table style="font-size:.78rem;border-collapse:collapse;margin-top:4px">
+         <tr><th style="padding:1px 5px">学年組番</th><th style="padding:1px 5px">性別</th><th style="padding:1px 5px">日付</th></tr>
+         ${rows}
+       </table>`,
+      { sticky: true, opacity: 0.96 }
+    );
+  });
+}
 
 function initMap() {
   map = L.map('map').setView([35.330, 136.880], 11);
@@ -335,8 +425,11 @@ function initMap() {
     maxZoom: 18
   }).addTo(map);
 
+  // 地図クリックでルートをクリア
+  map.on('click', clearRoutes);
+
   companies.forEach(c => {
-    const assigned = matchStudents(c);
+    const assigned = matchStudents(c.no);
     const count = assigned.length;
     const color = getColor(c.industry);
     const dates = new Set(assigned.map(s => s.date));
@@ -350,12 +443,12 @@ function initMap() {
     }).addTo(map);
 
     const studentRows = assigned.length > 0
-      ? assigned.map(s => `<tr><td>${s.grade}年${s.cls}組${String(s.num).padStart(2,'0')}番</td><td>${s.gender||'-'}</td><td>${s.date}</td></tr>`).join('')
-      : '<tr><td colspan="3" style="color:#aaa;text-align:center">生徒なし</td></tr>';
+      ? assigned.map(s => `<tr><td>${s.grade}年${s.cls}組${String(s.num).padStart(2,'0')}番</td><td>${s.gender||'-'}</td><td>${s.date}</td><td>${s.station||'-'}</td></tr>`).join('')
+      : '<tr><td colspan="4" style="color:#aaa;text-align:center">生徒なし</td></tr>';
 
     const detailsHtml = count > 0
       ? `<details class="popup-students"><summary>配属生徒 ${count}名を見る</summary>
-           <table><tr><th>学年組番</th><th>性別</th><th>日付</th></tr>${studentRows}</table>
+           <table><tr><th>学年組番</th><th>性別</th><th>日付</th><th>最寄り駅</th></tr>${studentRows}</table>
          </details>`
       : `<div style="color:#aaa;font-size:.8rem;margin-top:4px">配属生徒なし</div>`;
 
@@ -366,7 +459,9 @@ function initMap() {
       <div class="popup-row"><span class="label">連絡先</span>${c.contact}</div>
       ${detailsHtml}
       <a class="gmap-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}" target="_blank">🗺 Google Mapsで開く</a>
-    `, { maxWidth: 350 });
+    `, { maxWidth: 360 });
+
+    marker.on('click', () => showRoutes(c, assigned));
 
     markerData.push({ marker, dates, count, color, lat: c.lat, lng: c.lng });
   });
@@ -396,7 +491,11 @@ function initMap() {
       <div><span class="legend-dot" style="background:#ff7043"></span>食品・飲食</div>
       <div><span class="legend-dot" style="background:#d81b60"></span>美容業</div>
       <div><span class="legend-dot" style="background:#1e88e5"></span>小売・その他</div>
-      <div style="margin-top:6px;color:#888;font-size:.75rem">●サイズ＝配属人数</div>`;
+      <div style="margin-top:6px;color:#888;font-size:.75rem">●サイズ＝配属人数</div>
+      <div style="margin-top:4px;display:flex;align-items:center;gap:5px;color:#888;font-size:.75rem">
+        <div style="width:10px;height:10px;background:#ff6f00;border-radius:2px;transform:rotate(45deg)"></div>
+        クリックで最寄り駅表示
+      </div>`;
     return div;
   };
   legend.addTo(map);
@@ -405,27 +504,23 @@ function initMap() {
 
 function filterMap(date) {
   currentDateFilter = date;
+  clearRoutes();
 
-  // Update buttons
   document.querySelectorAll('.date-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent === (date || 'すべて'));
   });
 
   let visibleCount = 0;
-  let studentCount = 0;
   markerData.forEach(({ marker, dates, count }) => {
     const show = date === '' || dates.has(date);
     if (show) {
       if (!map.hasLayer(marker)) marker.addTo(map);
       visibleCount++;
-      if (date === '') studentCount += count;
-      else studentCount += [...dates].filter(d => d === date).length;
     } else {
       if (map.hasLayer(marker)) map.removeLayer(marker);
     }
   });
 
-  // Count students for selected date
   const sCount = date === ''
     ? students.length
     : students.filter(s => s.date === date).length;
@@ -480,7 +575,7 @@ function renderTable(data) {
     const tr = document.createElement('tr');
     const g = s.gender === '女' ? `<span class="badge badge-f">女</span>`
              : s.gender === '男' ? `<span class="badge badge-m">男</span>` : '-';
-    tr.innerHTML = `<td>${s.grade}年生</td><td>${s.cls}組</td><td>${s.num}番</td><td>${g}</td><td>${s.company}</td><td>${s.date}</td>`;
+    tr.innerHTML = `<td>${s.grade}年生</td><td>${s.cls}組</td><td>${s.num}番</td><td>${g}</td><td>${s.company}</td><td>${s.date}</td><td>${s.station||'-'}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('count-badge').textContent = `${data.length}件`;
