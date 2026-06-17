@@ -17,8 +17,18 @@
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
+  /* Map date filter */
+  #map-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+                padding: 8px 14px; background: #283593; border-bottom: 1px solid #1a237e; }
+  #map-filter span { color: #9fa8da; font-size: 0.8rem; margin-right: 4px; }
+  .date-btn { padding: 4px 12px; border-radius: 20px; border: 1.5px solid #5c6bc0;
+              background: transparent; color: #c5cae9; font-size: 0.82rem; cursor: pointer; transition: all .15s; }
+  .date-btn:hover { background: #3949ab; color: #fff; }
+  .date-btn.active { background: #fff; color: #1a237e; border-color: #fff; font-weight: 600; }
+  #map-info { margin-left: auto; color: #9fa8da; font-size: 0.8rem; }
+
   /* Map */
-  #map { height: calc(100vh - 100px); width: 100%; }
+  #map { height: calc(100vh - 148px); width: 100%; }
   .leaflet-popup-content { min-width: 270px; font-size: 0.85rem; line-height: 1.7; }
   .leaflet-popup-content h3 { font-size: 0.95rem; color: #1a237e; margin-bottom: 6px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; }
   .leaflet-popup-content .label { color: #777; font-size: 0.78rem; min-width: 54px; display: inline-block; }
@@ -67,6 +77,11 @@
 </div>
 
 <div id="tab-map" class="tab-content active">
+  <div id="map-filter">
+    <span>📅 日付：</span>
+    <button class="date-btn active" onclick="filterMap('')">すべて</button>
+    <span id="map-info"></span>
+  </div>
   <div id="map"></div>
 </div>
 <div id="tab-db" class="tab-content">
@@ -310,6 +325,9 @@ function getColor(industry) {
 
 // ===== Map =====
 let map;
+const markerData = []; // { marker, dates: Set, count }
+let currentDateFilter = '';
+
 function initMap() {
   map = L.map('map').setView([35.330, 136.880], 11);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -321,6 +339,7 @@ function initMap() {
     const assigned = matchStudents(c);
     const count = assigned.length;
     const color = getColor(c.industry);
+    const dates = new Set(assigned.map(s => s.date));
 
     const marker = L.circleMarker([c.lat, c.lng], {
       radius: 8 + Math.min(count * 1.5, 12),
@@ -348,6 +367,22 @@ function initMap() {
       ${detailsHtml}
       <a class="gmap-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}" target="_blank">🗺 Google Mapsで開く</a>
     `, { maxWidth: 350 });
+
+    markerData.push({ marker, dates, count, color, lat: c.lat, lng: c.lng });
+  });
+
+  // Build date filter buttons
+  const allDates = [...new Set(students.map(s => s.date))].sort((a, b) => {
+    const n = d => { const m = d.match(/(\d+)\/(\d+)/); return m ? parseInt(m[1]) * 100 + parseInt(m[2]) : 0; };
+    return n(a) - n(b);
+  });
+  const bar = document.getElementById('map-filter');
+  allDates.forEach(d => {
+    const btn = document.createElement('button');
+    btn.className = 'date-btn';
+    btn.textContent = d;
+    btn.onclick = () => filterMap(d);
+    bar.insertBefore(btn, document.getElementById('map-info'));
   });
 
   // Legend
@@ -365,6 +400,38 @@ function initMap() {
     return div;
   };
   legend.addTo(map);
+  filterMap('');
+}
+
+function filterMap(date) {
+  currentDateFilter = date;
+
+  // Update buttons
+  document.querySelectorAll('.date-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === (date || 'すべて'));
+  });
+
+  let visibleCount = 0;
+  let studentCount = 0;
+  markerData.forEach(({ marker, dates, count }) => {
+    const show = date === '' || dates.has(date);
+    if (show) {
+      if (!map.hasLayer(marker)) marker.addTo(map);
+      visibleCount++;
+      if (date === '') studentCount += count;
+      else studentCount += [...dates].filter(d => d === date).length;
+    } else {
+      if (map.hasLayer(marker)) map.removeLayer(marker);
+    }
+  });
+
+  // Count students for selected date
+  const sCount = date === ''
+    ? students.length
+    : students.filter(s => s.date === date).length;
+
+  document.getElementById('map-info').textContent =
+    `${visibleCount}事業所 / ${sCount}名`;
 }
 
 // ===== DB =====
