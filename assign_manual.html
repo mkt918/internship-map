@@ -188,16 +188,21 @@ select:focus,input:focus{border-color:var(--accent)}
         </select>
       </div>
       <div class="frow" style="margin-top:5px">
-        <select id="fMatch">
+        <select id="fMatch" style="flex:1">
           <option value="all">全マッチ</option>
           <option value="0">✅ 第1希望一致</option>
           <option value="12">⭕ 第2〜3希望</option>
           <option value="3">🔴 不一致</option>
         </select>
-        <select id="fSort">
+        <select id="fSort" style="flex:1">
           <option value="match">マッチ順</option>
           <option value="grade">学年順</option>
           <option value="station">最寄り駅順</option>
+        </select>
+      </div>
+      <div class="frow" style="margin-top:5px">
+        <select id="fStation" style="flex:1">
+          <option value="">全駅</option>
         </select>
       </div>
     </div>
@@ -472,12 +477,14 @@ function renderStuList(){
   const stF   = document.getElementById('fStat').value;
   const mF    = document.getElementById('fMatch').value;
   const sortF = document.getElementById('fSort').value;
+  const staF  = document.getElementById('fStation').value;
   const el    = document.getElementById('stuList');
   const comp  = selComp ? companies[selComp] : null;
 
   let list = Object.values(students).filter(s=>{
     if(grF && s['学年']!==grF) return false;
     if(clF && s['組']!==clF) return false;
+    if(staF && (s['最寄り駅']||s['市町']||'不明')!==staF) return false;
     if(stF==='assigned'   && !assign[s.id]) return false;
     if(stF==='unassigned' &&  assign[s.id]) return false;
     if(comp){
@@ -606,6 +613,8 @@ function unassignStudent(id){
 function renderAll(){
   renderCompList();
   renderAssignBoard();
+  updateClsOptions();
+  updateStationOptions();
   renderStuList();
   updateStats();
 }
@@ -618,6 +627,18 @@ function updateClsOptions(){
   const cur = clSel.value;
   clSel.innerHTML = '<option value="">全組</option>' +
     [...cls].sort((a,b)=>Number(a)-Number(b)).map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}組</option>`).join('');
+}
+
+function updateStationOptions(){
+  const grF = document.getElementById('fGr').value;
+  const clF = document.getElementById('fCls').value;
+  const stSel = document.getElementById('fStation');
+  const sts = new Set(Object.values(students)
+    .filter(s=>(!grF||s['学年']===grF) && (!clF||s['組']===clF))
+    .map(s=>s['最寄り駅']||s['市町']||'不明'));
+  const cur = stSel.value;
+  stSel.innerHTML = '<option value="">全駅</option>' +
+    [...sts].sort().map(st=>`<option value="${st}"${st===cur?' selected':''}>${st}</option>`).join('');
 }
 
 // ─── LocalStorage ─────────────────────────────────────────────────────────────
@@ -736,8 +757,9 @@ document.getElementById('btnExport').addEventListener('click', exportCSV);
 
 // Filter events
 ['fCat','fGrade'].forEach(id=>document.getElementById(id).addEventListener('change', renderCompList));
-['fGr','fCls','fStat','fMatch','fSort'].forEach(id=>document.getElementById(id).addEventListener('change', renderStuList));
-document.getElementById('fGr').addEventListener('change', ()=>{ updateClsOptions(); renderStuList(); });
+['fGr','fCls','fStat','fMatch','fSort','fStation'].forEach(id=>document.getElementById(id).addEventListener('change', renderStuList));
+document.getElementById('fGr').addEventListener('change', ()=>{ updateClsOptions(); updateStationOptions(); renderStuList(); });
+document.getElementById('fCls').addEventListener('change', ()=>{ updateStationOptions(); renderStuList(); });
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 // Try auto-fetch on load
