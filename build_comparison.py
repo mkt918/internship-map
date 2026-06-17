@@ -19,13 +19,44 @@ def load(path):
 old = load(BASE + r'\旧配置案.csv')
 new = load(BASE + r'\新配置案.csv')
 
-# マッチラベル → レベル（小さいほど良い）
-LEVEL = {
-    '◎事前説明1': 0, '◎事前説明2': 1,
-    '○第1希望': 2, '○第2希望': 3, '○第3希望': 4,
-    '🔴不一致': 5, '[NG]不一致': 5, '不一致': 5,
-}
+# マッチレベル名（小さいほど良い）
 LEVEL_NAME = {0:'事前説明1', 1:'事前説明2', 2:'第1希望', 3:'第2希望', 4:'第3希望', 5:'業種不一致'}
+LEVEL_LABEL = {0:'◎事前説明1', 1:'◎事前説明2', 2:'○第1希望', 3:'○第2希望', 4:'○第3希望', 5:'🔴不一致'}
+
+# ----------------------------------------------------------------
+# 業種カテゴリの正規化と同一視
+#   - 製造工業 と 製造食品 は同一とみなす（→ '製造' に統合）
+# ----------------------------------------------------------------
+def norm_cat(c):
+    c = (c or '').strip()
+    m = {
+        '製造（食品）':'製造', '製造（工業）':'製造',
+        '製造食品':'製造', '製造工業':'製造',
+        '販売・サービス':'販売', 'アパレル':'販売', '販売':'販売',
+        '保育・幼児教育':'保育', '保育':'保育',
+        '運輸・物流':'物流', '物流':'物流',
+        '美容':'美容', 'その他':'その他',
+    }
+    return m.get(c, c)
+
+def comp_cat_set(cat_field):
+    """企業の業種カテゴリ（カンマ区切り）を正規化集合に。"""
+    return {norm_cat(x) for x in (cat_field or '').split(',') if x.strip()}
+
+def recompute_level(row):
+    """事前説明1>事前説明2>第1>第2>第3希望 の順で、製造統合ルールで判定。"""
+    cats = comp_cat_set(row.get('業種カテゴリ',''))
+    layers = [
+        norm_cat(row.get('事前説明1','')),
+        norm_cat(row.get('事前説明2','')),
+        norm_cat(row.get('第1希望','')),
+        norm_cat(row.get('第2希望','')),
+        norm_cat(row.get('第3希望','')),
+    ]
+    for i, p in enumerate(layers):
+        if p and p != 'その他' and p in cats:
+            return i
+    return 5
 
 def to_float(x):
     try:
@@ -33,9 +64,8 @@ def to_float(x):
     except (ValueError, TypeError):
         return None
 
-def match_penalty(label):
-    lv = LEVEL.get(label, 5)
-    return {0:0, 1:0, 2:1, 3:2, 4:3, 5:5}[lv], lv
+def match_penalty(lv):
+    return {0:0, 1:0, 2:1, 3:2, 4:3, 5:5}[lv]
 
 def dist_penalty(dist):
     if dist is None:
@@ -62,21 +92,30 @@ for key in sorted(old.keys(), key=lambda k:(int(k[0]), int(k[1]), int(k[2]))):
     o = old[key]
     n = new.get(key, {})
 
-    o_match = o['業種マッチ'].strip()
     o_dist  = to_float(o['距離km'])
     o_comp  = o['企業名'].strip()
     o_date  = o['日付'].strip()
     o_eki   = o['最寄り駅'].strip()
 
-    n_match = n.get('業種マッチ','').strip()
     n_dist  = to_float(n.get('距離km'))
     n_comp  = n.get('企業名','').strip()
     n_date  = n.get('日付','').strip()
 
-    mp, o_lv = match_penalty(o_match)
+    # 製造統合ルールでマッチレベルを再計算
+    o_lv = recompute_level(o)
+    n_lv = recompute_level(n) if n else None
+    o_match = LEVEL_LABEL[o_lv]
+    n_match = LEVEL_LABEL[n_lv] if n_lv is not None else ''
+
+    mp = match_penalty(o_lv)
     dp, dist_reason = dist_penalty(o_dist)
     raw = mp + dp
-    rank = max(1, min(5, raw))
+    rank = min(5, raw)   # ×0 を許容（下限なし）
+
+    # 中央可鍛工業は問答無用で ×5
+    forced = '中央可鍛' in o_comp
+    if forced:
+        rank = 5
 
     # ---- 理由文を構築 ----
     reasons = []
@@ -96,7 +135,6 @@ for key in sorted(old.keys(), key=lambda k:(int(k[0]), int(k[1]), int(k[2]))):
         pass  # 既に距離未算出で言及
 
     # ---- 新配置案との比較 ----
-    n_lv = LEVEL.get(n_match, None)
     comp_notes = []
     if n_lv is not None:
         if n_lv < o_lv:
@@ -114,17 +152,21 @@ for key in sorted(old.keys(), key=lambda k:(int(k[0]), int(k[1]), int(k[2]))):
 
     # ---- 備考まとめ ----
     if not reasons:
-        body = '旧案でも事前説明一致かつ近距離で許容範囲'
+        body = '旧案でも事前説明一致かつ近距離で問題なし（製造工業・製造食品は同一視）'
     else:
         body = '／'.join(reasons)
     if comp_notes:
         body += '。' + '、'.join(comp_notes)
+    if forced:
+        body = '【中央可鍛工業のため強制×5】' + body
+
+    rank_disp = '×'*rank if rank > 0 else '×0(問題なし)'
 
     rows.append([
         key[0], key[1], key[2], o['性別'].strip(),
         o_comp, o_match, o['距離km'].strip(), o_date,
         n_comp, n_match, n.get('距離km','').strip(), n_date,
-        '×'*rank, body
+        rank_disp, body
     ])
     rank_counter[rank] = rank_counter.get(rank, 0) + 1
 
