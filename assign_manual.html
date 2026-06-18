@@ -146,6 +146,7 @@ select:focus{border-color:var(--accent)}
   <div class="hbtns">
     <button class="btn-s" id="btnLoad">📂 CSV再読込</button>
     <button class="btn-s" id="btnLoadAssign">📥 配置案を読込</button>
+    <button class="btn-s" id="btnLoadKajita">🔄 梶田案を再読込</button>
     <button class="btn-d" id="btnClear">🗑 配置クリア</button>
     <button class="btn-p" id="btnExport">💾 CSV出力</button>
   </div>
@@ -242,10 +243,12 @@ function catColor(c){return catHex[c]||'#6b7280';}
 // ─── Match hierarchy: 事前説明1>事前説明2>第1>第2>第3 ──
 const matchIcon=['◎','◎','○','○','○','🔴'];
 const matchCls =['m0','m1','m2','m3','m4','m5'];
+// 製造工業・製造食品は同一視（'製造'に統合）してマッチ判定
+function normMatchCat(c){return (c==='製造工業'||c==='製造食品')?'製造':c;}
 function matchLevel(s, comp){
-  const cc = comp.cats;
+  const cc = comp.cats.map(normMatchCat);
   for(let i=0;i<s.prefLayers.length;i++){
-    const p=s.prefLayers[i];
+    const p=normMatchCat(s.prefLayers[i]);
     if(p && p!=='その他' && cc.includes(p)) return i;
   }
   return 5;
@@ -612,7 +615,7 @@ async function autoFetch(){
     try{const loc=await fetch('企業立地DB.csv');if(loc.ok)loadLoc(await loc.text());}catch{}
     try{const sta=await fetch('駅マスターDB.csv');if(sta.ok)loadStations(await sta.text());}catch{}
     let hadLocal=false;loadLocal();if(Object.keys(assign).length)hadLocal=true;
-    if(!hadLocal){try{const as=await fetch('新配置案.csv');if(as.ok)loadAssignments(await as.text());}catch{}}
+    if(!hadLocal){try{let as=await fetch('梶田正規化.csv');if(!as.ok)as=await fetch('新配置案.csv');if(as.ok)loadAssignments(await as.text());}catch{}}
     finishLoad();
   }catch(e){msg.textContent='自動取得失敗。CSVをアップロードしてください。('+e.message+')';}
 }
@@ -629,6 +632,12 @@ document.getElementById('btnLoadAssign').addEventListener('click',()=>{
   inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
     r.onload=()=>{loadAssignments(r.result);saveLocal();renderAll();updateMapForSelection();toast('配置案を読込（'+Object.keys(assign).length+'件）');};
     r.readAsText(f,'UTF-8');};inp.click();});
+document.getElementById('btnLoadKajita').addEventListener('click',async()=>{
+  if(!confirm('現在の配置を破棄して梶田正規化.csvを再読込しますか?'))return;
+  try{const as=await fetch('梶田正規化.csv');if(!as.ok)throw 0;
+    loadAssignments(await as.text());saveLocal();renderAll();updateMapForSelection();
+    toast('梶田正規化案を読込（'+Object.keys(assign).length+'件）');
+  }catch{toast('梶田正規化.csv の取得に失敗しました');}});
 document.getElementById('btnClear').addEventListener('click',()=>{
   if(!confirm('全配置をクリアしますか?'))return;assign={};saveLocal();renderAll();updateMapForSelection();toast('配置をクリアしました');});
 document.getElementById('btnExport').addEventListener('click',exportCSV);
