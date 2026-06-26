@@ -3,7 +3,7 @@
     "date": "7/27(月)",
     "n_companies": 8,
     "n_students": 13,
-    "n_teachers": 3,
+    "n_teachers": 4,
     "routes": [
       {
         "teacher": 1,
@@ -100,7 +100,16 @@
               "2-1-36"
             ],
             "dist_from_prev": 3.4
-          },
+          }
+        ],
+        "total_km": 9.3,
+        "n_companies": 2,
+        "n_students": 3,
+        "has_15": false
+      },
+      {
+        "teacher": 4,
+        "stops": [
           {
             "name": "GARN（ガルン）　モゾワンダーシティ店",
             "cat": "販売",
@@ -109,12 +118,12 @@
             "students": [
               "2-4-1"
             ],
-            "dist_from_prev": 14.3
+            "dist_from_prev": 12.1
           }
         ],
-        "total_km": 32.1,
-        "n_companies": 3,
-        "n_students": 4,
+        "total_km": 24.2,
+        "n_companies": 1,
+        "n_students": 1,
         "has_15": false
       }
     ]
@@ -233,7 +242,7 @@
     "date": "7/29(水)",
     "n_companies": 9,
     "n_students": 15,
-    "n_teachers": 4,
+    "n_teachers": 5,
     "routes": [
       {
         "teacher": 1,
@@ -350,7 +359,16 @@
               "2-4-14"
             ],
             "dist_from_prev": 4.4
-          },
+          }
+        ],
+        "total_km": 10.3,
+        "n_companies": 2,
+        "n_students": 5,
+        "has_15": false
+      },
+      {
+        "teacher": 5,
+        "stops": [
           {
             "name": "GARN（ガルン）　モゾワンダーシティ店",
             "cat": "販売",
@@ -359,12 +377,12 @@
             "students": [
               "2-4-11"
             ],
-            "dist_from_prev": 12.9
+            "dist_from_prev": 12.1
           }
         ],
-        "total_km": 30.4,
-        "n_companies": 3,
-        "n_students": 6,
+        "total_km": 24.2,
+        "n_companies": 1,
+        "n_students": 1,
         "has_15": false
       }
     ]
@@ -373,52 +391,26 @@
     "date": "7/30(木)",
     "n_companies": 8,
     "n_students": 21,
-    "n_teachers": 3,
+    "n_teachers": 4,
     "routes": [
       {
         "teacher": 1,
         "stops": [
           {
-            "name": "江南市立古知野東保育園",
+            "name": "江南市立藤里保育園",
             "cat": "保育",
-            "lat": 35.34539,
-            "lng": 136.880692,
+            "lat": 35.352188,
+            "lng": 136.85791,
             "students": [
-              "1-5-3",
-              "1-5-31"
+              "2-4-7"
             ],
-            "dist_from_prev": 1.6
-          },
-          {
-            "name": "江南市立小鹿保育園",
-            "cat": "保育",
-            "lat": 35.363976,
-            "lng": 136.874802,
-            "students": [
-              "1-5-36",
-              "2-2-8"
-            ],
-            "dist_from_prev": 2.1
-          },
-          {
-            "name": "リスパック株式会社 真空成形工場",
-            "cat": "製造工業",
-            "lat": 35.34903,
-            "lng": 136.941666,
-            "students": [
-              "1-5-6",
-              "2-1-27",
-              "2-1-28",
-              "2-3-11",
-              "2-3-17"
-            ],
-            "dist_from_prev": 6.3
+            "dist_from_prev": 3.6
           }
         ],
-        "total_km": 14.9,
-        "n_companies": 3,
-        "n_students": 9,
-        "has_15": true
+        "total_km": 7.2,
+        "n_companies": 1,
+        "n_students": 1,
+        "has_15": false
       },
       {
         "teacher": 2,
@@ -467,15 +459,50 @@
         "teacher": 3,
         "stops": [
           {
-            "name": "江南市立藤里保育園",
+            "name": "江南市立古知野東保育園",
             "cat": "保育",
-            "lat": 35.352188,
-            "lng": 136.85791,
+            "lat": 35.34539,
+            "lng": 136.880692,
             "students": [
-              "2-4-7"
+              "1-5-3",
+              "1-5-31"
             ],
-            "dist_from_prev": 3.6
+            "dist_from_prev": 1.6
           },
+          {
+            "name": "江南市立小鹿保育園",
+            "cat": "保育",
+            "lat": 35.363976,
+            "lng": 136.874802,
+            "students": [
+              "1-5-36",
+              "2-2-8"
+            ],
+            "dist_from_prev": 2.1
+          },
+          {
+            "name": "リスパック株式会社 真空成形工場",
+            "cat": "製造工業",
+            "lat": 35.34903,
+            "lng": 136.941666,
+            "students": [
+              "1-5-6",
+              "2-1-27",
+              "2-1-28",
+              "2-3-11",
+              "2-3-17"
+            ],
+            "dist_from_prev": 6.3
+          }
+        ],
+        "total_km": 14.9,
+        "n_companies": 3,
+        "n_students": 9,
+        "has_15": true
+      },
+      {
+        "teacher": 4,
+        "stops": [
           {
             "name": "ＮＸキャッシュ・ロジスティクス株式会社　中部支店",
             "cat": "物流",
@@ -487,12 +514,12 @@
               "2-2-15",
               "2-4-12"
             ],
-            "dist_from_prev": 22.0
+            "dist_from_prev": 20.3
           }
         ],
-        "total_km": 45.9,
-        "n_companies": 2,
-        "n_students": 5,
+        "total_km": 40.6,
+        "n_companies": 1,
+        "n_students": 4,
         "has_15": false
       }
     ]
@@ -556,11 +583,22 @@
               "2-4-22"
             ],
             "dist_from_prev": 6.4
+          },
+          {
+            "name": "東名化学工業株式会社　小牧工場",
+            "cat": "製造工業",
+            "lat": 35.301033,
+            "lng": 137.002777,
+            "students": [
+              "2-3-8",
+              "2-3-13"
+            ],
+            "dist_from_prev": 5.1
           }
         ],
-        "total_km": 12.8,
-        "n_companies": 1,
-        "n_students": 2,
+        "total_km": 22.3,
+        "n_companies": 2,
+        "n_students": 4,
         "has_15": true
       },
       {
@@ -622,22 +660,11 @@
               "2-4-24"
             ],
             "dist_from_prev": 2.5
-          },
-          {
-            "name": "東名化学工業株式会社　小牧工場",
-            "cat": "製造工業",
-            "lat": 35.301033,
-            "lng": 137.002777,
-            "students": [
-              "2-3-8",
-              "2-3-13"
-            ],
-            "dist_from_prev": 10.7
           }
         ],
-        "total_km": 26.1,
-        "n_companies": 3,
-        "n_students": 7,
+        "total_km": 9.2,
+        "n_companies": 2,
+        "n_students": 5,
         "has_15": false
       }
     ]
