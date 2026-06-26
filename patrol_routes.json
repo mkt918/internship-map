@@ -3,10 +3,51 @@
     "date": "7/27(月)",
     "n_companies": 8,
     "n_students": 13,
-    "n_teachers": 4,
+    "n_teachers": 3,
     "routes": [
       {
         "teacher": 1,
+        "stops": [
+          {
+            "name": "きもの館なかね",
+            "cat": "販売",
+            "lat": 35.339359,
+            "lng": 136.871674,
+            "students": [
+              "1-5-9",
+              "1-5-10"
+            ],
+            "dist_from_prev": 1.8
+          },
+          {
+            "name": "江南市立宮田南保育園",
+            "cat": "保育",
+            "lat": 35.345955,
+            "lng": 136.852081,
+            "students": [
+              "1-5-26"
+            ],
+            "dist_from_prev": 1.9
+          },
+          {
+            "name": "株式会社扶桑守口食品",
+            "cat": "製造食品, 販売",
+            "lat": 35.371872,
+            "lng": 136.907837,
+            "students": [
+              "1-5-30",
+              "1-5-40"
+            ],
+            "dist_from_prev": 5.8
+          }
+        ],
+        "total_km": 14.1,
+        "n_companies": 3,
+        "n_students": 5,
+        "has_15": true
+      },
+      {
+        "teacher": 2,
         "stops": [
           {
             "name": "株式会社青山製作所　大口工場",
@@ -29,7 +70,16 @@
               "1-5-21"
             ],
             "dist_from_prev": 2.4
-          },
+          }
+        ],
+        "total_km": 5.8,
+        "n_companies": 2,
+        "n_students": 4,
+        "has_15": true
+      },
+      {
+        "teacher": 3,
+        "stops": [
           {
             "name": "ドコモショップ江南店",
             "cat": "販売",
@@ -39,26 +89,7 @@
               "2-1-6",
               "2-1-13"
             ],
-            "dist_from_prev": 0.1
-          }
-        ],
-        "total_km": 5.9,
-        "n_companies": 3,
-        "n_students": 6
-      },
-      {
-        "teacher": 2,
-        "stops": [
-          {
-            "name": "きもの館なかね",
-            "cat": "販売",
-            "lat": 35.339359,
-            "lng": 136.871674,
-            "students": [
-              "1-5-9",
-              "1-5-10"
-            ],
-            "dist_from_prev": 1.8
+            "dist_from_prev": 2.4
           },
           {
             "name": "江南市立藤里保育園",
@@ -68,45 +99,8 @@
             "students": [
               "2-1-36"
             ],
-            "dist_from_prev": 1.9
+            "dist_from_prev": 3.4
           },
-          {
-            "name": "江南市立宮田南保育園",
-            "cat": "保育",
-            "lat": 35.345955,
-            "lng": 136.852081,
-            "students": [
-              "1-5-26"
-            ],
-            "dist_from_prev": 0.9
-          }
-        ],
-        "total_km": 8.4,
-        "n_companies": 3,
-        "n_students": 4
-      },
-      {
-        "teacher": 3,
-        "stops": [
-          {
-            "name": "株式会社扶桑守口食品",
-            "cat": "製造食品, 販売",
-            "lat": 35.371872,
-            "lng": 136.907837,
-            "students": [
-              "1-5-30",
-              "1-5-40"
-            ],
-            "dist_from_prev": 4.5
-          }
-        ],
-        "total_km": 9.0,
-        "n_companies": 1,
-        "n_students": 2
-      },
-      {
-        "teacher": 4,
-        "stops": [
           {
             "name": "GARN（ガルン）　モゾワンダーシティ店",
             "cat": "販売",
@@ -115,12 +109,13 @@
             "students": [
               "2-4-1"
             ],
-            "dist_from_prev": 12.1
+            "dist_from_prev": 14.3
           }
         ],
-        "total_km": 24.2,
-        "n_companies": 1,
-        "n_students": 1
+        "total_km": 32.1,
+        "n_companies": 3,
+        "n_students": 4,
+        "has_15": false
       }
     ]
   },
@@ -153,21 +148,12 @@
               "1-5-37"
             ],
             "dist_from_prev": 1.8
-          },
-          {
-            "name": "江南市立藤里保育園",
-            "cat": "保育",
-            "lat": 35.352188,
-            "lng": 136.85791,
-            "students": [
-              "2-2-13"
-            ],
-            "dist_from_prev": 3.4
           }
         ],
-        "total_km": 10.8,
-        "n_companies": 3,
-        "n_students": 4
+        "total_km": 6.1,
+        "n_companies": 2,
+        "n_students": 3,
+        "has_15": true
       },
       {
         "teacher": 2,
@@ -208,11 +194,22 @@
         ],
         "total_km": 11.0,
         "n_companies": 3,
-        "n_students": 6
+        "n_students": 6,
+        "has_15": true
       },
       {
         "teacher": 3,
         "stops": [
+          {
+            "name": "江南市立藤里保育園",
+            "cat": "保育",
+            "lat": 35.352188,
+            "lng": 136.85791,
+            "students": [
+              "2-2-13"
+            ],
+            "dist_from_prev": 3.6
+          },
           {
             "name": "東名化学工業株式会社　小牧工場",
             "cat": "製造工業",
@@ -222,12 +219,13 @@
               "2-1-15",
               "2-4-20"
             ],
-            "dist_from_prev": 10.8
+            "dist_from_prev": 14.3
           }
         ],
-        "total_km": 21.6,
-        "n_companies": 1,
-        "n_students": 2
+        "total_km": 28.7,
+        "n_companies": 2,
+        "n_students": 3,
+        "has_15": false
       }
     ]
   },
@@ -241,6 +239,25 @@
         "teacher": 1,
         "stops": [
           {
+            "name": "榮美容室本店",
+            "cat": "美容",
+            "lat": 35.303158,
+            "lng": 136.803268,
+            "students": [
+              "1-5-27"
+            ],
+            "dist_from_prev": 8.6
+          }
+        ],
+        "total_km": 17.3,
+        "n_companies": 1,
+        "n_students": 1,
+        "has_15": true
+      },
+      {
+        "teacher": 2,
+        "stops": [
+          {
             "name": "江南中央食品",
             "cat": "製造食品, 販売",
             "lat": 35.3391,
@@ -251,24 +268,6 @@
             "dist_from_prev": 2.0
           },
           {
-            "name": "江南市立藤里保育園",
-            "cat": "保育",
-            "lat": 35.352188,
-            "lng": 136.85791,
-            "students": [
-              "2-2-20"
-            ],
-            "dist_from_prev": 1.8
-          }
-        ],
-        "total_km": 7.4,
-        "n_companies": 2,
-        "n_students": 2
-      },
-      {
-        "teacher": 2,
-        "stops": [
-          {
             "name": "江南市立布袋西保育園",
             "cat": "保育",
             "lat": 35.323299,
@@ -277,8 +276,28 @@
               "1-5-4",
               "1-5-22"
             ],
-            "dist_from_prev": 2.4
+            "dist_from_prev": 1.8
           },
+          {
+            "name": "ガレ・ドゥ・ワタナベ",
+            "cat": "製造食品, 販売",
+            "lat": 35.313831,
+            "lng": 136.878494,
+            "students": [
+              "1-5-11",
+              "1-5-13"
+            ],
+            "dist_from_prev": 1.5
+          }
+        ],
+        "total_km": 7.7,
+        "n_companies": 3,
+        "n_students": 5,
+        "has_15": true
+      },
+      {
+        "teacher": 3,
+        "stops": [
           {
             "name": "株式会社綿半ホームエイド江南店",
             "cat": "販売",
@@ -288,40 +307,23 @@
               "2-1-21",
               "2-2-4"
             ],
-            "dist_from_prev": 1.3
-          }
-        ],
-        "total_km": 6.6,
-        "n_companies": 2,
-        "n_students": 4
-      },
-      {
-        "teacher": 3,
-        "stops": [
-          {
-            "name": "榮美容室本店",
-            "cat": "美容",
-            "lat": 35.303158,
-            "lng": 136.803268,
-            "students": [
-              "1-5-27"
-            ],
-            "dist_from_prev": 8.6
+            "dist_from_prev": 2.9
           },
           {
-            "name": "GARN（ガルン）　モゾワンダーシティ店",
-            "cat": "販売",
-            "lat": 35.225266,
-            "lng": 136.883301,
+            "name": "江南市立藤里保育園",
+            "cat": "保育",
+            "lat": 35.352188,
+            "lng": 136.85791,
             "students": [
-              "2-4-11"
+              "2-2-20"
             ],
-            "dist_from_prev": 11.3
+            "dist_from_prev": 2.2
           }
         ],
-        "total_km": 32.0,
+        "total_km": 8.6,
         "n_companies": 2,
-        "n_students": 2
+        "n_students": 3,
+        "has_15": false
       },
       {
         "teacher": 4,
@@ -338,17 +340,6 @@
             "dist_from_prev": 1.1
           },
           {
-            "name": "ガレ・ドゥ・ワタナベ",
-            "cat": "製造食品, 販売",
-            "lat": 35.313831,
-            "lng": 136.878494,
-            "students": [
-              "1-5-11",
-              "1-5-13"
-            ],
-            "dist_from_prev": 2.0
-          },
-          {
             "name": "キムラユニティー株式会社　犬山工場（調整中）",
             "cat": "物流",
             "lat": 35.329754,
@@ -358,12 +349,23 @@
               "2-1-19",
               "2-4-14"
             ],
-            "dist_from_prev": 6.2
+            "dist_from_prev": 4.4
+          },
+          {
+            "name": "GARN（ガルン）　モゾワンダーシティ店",
+            "cat": "販売",
+            "lat": 35.225266,
+            "lng": 136.883301,
+            "students": [
+              "2-4-11"
+            ],
+            "dist_from_prev": 12.9
           }
         ],
-        "total_km": 14.1,
+        "total_km": 30.4,
         "n_companies": 3,
-        "n_students": 7
+        "n_students": 6,
+        "has_15": false
       }
     ]
   },
@@ -371,64 +373,10 @@
     "date": "7/30(木)",
     "n_companies": 8,
     "n_students": 21,
-    "n_teachers": 4,
+    "n_teachers": 3,
     "routes": [
       {
         "teacher": 1,
-        "stops": [
-          {
-            "name": "ガレ・ドゥ・ワタナベ",
-            "cat": "製造食品, 販売",
-            "lat": 35.313831,
-            "lng": 136.878494,
-            "students": [
-              "1-5-33",
-              "1-5-38"
-            ],
-            "dist_from_prev": 2.5
-          },
-          {
-            "name": "リスパック株式会社 真空成形工場",
-            "cat": "製造工業",
-            "lat": 35.34903,
-            "lng": 136.941666,
-            "students": [
-              "1-5-6",
-              "2-1-27",
-              "2-1-28",
-              "2-3-11",
-              "2-3-17"
-            ],
-            "dist_from_prev": 6.9
-          }
-        ],
-        "total_km": 14.3,
-        "n_companies": 2,
-        "n_students": 7
-      },
-      {
-        "teacher": 2,
-        "stops": [
-          {
-            "name": "ＮＸキャッシュ・ロジスティクス株式会社　中部支店",
-            "cat": "物流",
-            "lat": 35.154476,
-            "lng": 136.850098,
-            "students": [
-              "2-2-9",
-              "2-2-11",
-              "2-2-15",
-              "2-4-12"
-            ],
-            "dist_from_prev": 20.3
-          }
-        ],
-        "total_km": 40.6,
-        "n_companies": 1,
-        "n_students": 4
-      },
-      {
-        "teacher": 3,
         "stops": [
           {
             "name": "江南市立古知野東保育園",
@@ -442,6 +390,40 @@
             "dist_from_prev": 1.6
           },
           {
+            "name": "江南市立小鹿保育園",
+            "cat": "保育",
+            "lat": 35.363976,
+            "lng": 136.874802,
+            "students": [
+              "1-5-36",
+              "2-2-8"
+            ],
+            "dist_from_prev": 2.1
+          },
+          {
+            "name": "リスパック株式会社 真空成形工場",
+            "cat": "製造工業",
+            "lat": 35.34903,
+            "lng": 136.941666,
+            "students": [
+              "1-5-6",
+              "2-1-27",
+              "2-1-28",
+              "2-3-11",
+              "2-3-17"
+            ],
+            "dist_from_prev": 6.3
+          }
+        ],
+        "total_km": 14.9,
+        "n_companies": 3,
+        "n_students": 9,
+        "has_15": true
+      },
+      {
+        "teacher": 2,
+        "stops": [
+          {
             "name": "江南市立古知野中保育園",
             "cat": "保育",
             "lat": 35.342247,
@@ -451,7 +433,7 @@
               "1-5-39",
               "2-4-3"
             ],
-            "dist_from_prev": 1.0
+            "dist_from_prev": 2.0
           },
           {
             "name": "江南市立古知野西保育園",
@@ -463,14 +445,26 @@
               "1-5-32"
             ],
             "dist_from_prev": 1.9
+          },
+          {
+            "name": "ガレ・ドゥ・ワタナベ",
+            "cat": "製造食品, 販売",
+            "lat": 35.313831,
+            "lng": 136.878494,
+            "students": [
+              "1-5-33",
+              "1-5-38"
+            ],
+            "dist_from_prev": 3.3
           }
         ],
-        "total_km": 7.9,
+        "total_km": 9.7,
         "n_companies": 3,
-        "n_students": 7
+        "n_students": 7,
+        "has_15": true
       },
       {
-        "teacher": 4,
+        "teacher": 3,
         "stops": [
           {
             "name": "江南市立藤里保育園",
@@ -483,20 +477,23 @@
             "dist_from_prev": 3.6
           },
           {
-            "name": "江南市立小鹿保育園",
-            "cat": "保育",
-            "lat": 35.363976,
-            "lng": 136.874802,
+            "name": "ＮＸキャッシュ・ロジスティクス株式会社　中部支店",
+            "cat": "物流",
+            "lat": 35.154476,
+            "lng": 136.850098,
             "students": [
-              "1-5-36",
-              "2-2-8"
+              "2-2-9",
+              "2-2-11",
+              "2-2-15",
+              "2-4-12"
             ],
-            "dist_from_prev": 2.0
+            "dist_from_prev": 22.0
           }
         ],
-        "total_km": 9.3,
+        "total_km": 45.9,
         "n_companies": 2,
-        "n_students": 3
+        "n_students": 5,
+        "has_15": false
       }
     ]
   },
@@ -508,6 +505,66 @@
     "routes": [
       {
         "teacher": 1,
+        "stops": [
+          {
+            "name": "江南市立布袋北保育園",
+            "cat": "保育",
+            "lat": 35.324711,
+            "lng": 136.881989,
+            "students": [
+              "1-5-28"
+            ],
+            "dist_from_prev": 1.3
+          },
+          {
+            "name": "江南市立古知野南保育園",
+            "cat": "保育",
+            "lat": 35.336178,
+            "lng": 136.867859,
+            "students": [
+              "1-5-23",
+              "2-1-17"
+            ],
+            "dist_from_prev": 1.8
+          },
+          {
+            "name": "九品寺幼稚園",
+            "cat": "保育",
+            "lat": 35.311146,
+            "lng": 136.802643,
+            "students": [
+              "1-5-5"
+            ],
+            "dist_from_prev": 6.5
+          }
+        ],
+        "total_km": 18.0,
+        "n_companies": 3,
+        "n_students": 4,
+        "has_15": true
+      },
+      {
+        "teacher": 2,
+        "stops": [
+          {
+            "name": "東罐興業株式会社　小牧工場",
+            "cat": "製造工業",
+            "lat": 35.298954,
+            "lng": 136.94664,
+            "students": [
+              "1-5-34",
+              "2-4-22"
+            ],
+            "dist_from_prev": 6.4
+          }
+        ],
+        "total_km": 12.8,
+        "n_companies": 1,
+        "n_students": 2,
+        "has_15": true
+      },
+      {
+        "teacher": 3,
         "stops": [
           {
             "name": "グンゼ江南工場",
@@ -537,80 +594,12 @@
         ],
         "total_km": 8.3,
         "n_companies": 2,
-        "n_students": 7
-      },
-      {
-        "teacher": 2,
-        "stops": [
-          {
-            "name": "東罐興業株式会社　小牧工場",
-            "cat": "製造工業",
-            "lat": 35.298954,
-            "lng": 136.94664,
-            "students": [
-              "1-5-34",
-              "2-4-22"
-            ],
-            "dist_from_prev": 6.4
-          },
-          {
-            "name": "東名化学工業株式会社　小牧工場",
-            "cat": "製造工業",
-            "lat": 35.301033,
-            "lng": 137.002777,
-            "students": [
-              "2-3-8",
-              "2-3-13"
-            ],
-            "dist_from_prev": 5.1
-          }
-        ],
-        "total_km": 22.3,
-        "n_companies": 2,
-        "n_students": 4
-      },
-      {
-        "teacher": 3,
-        "stops": [
-          {
-            "name": "江南市立古知野南保育園",
-            "cat": "保育",
-            "lat": 35.336178,
-            "lng": 136.867859,
-            "students": [
-              "1-5-23",
-              "2-1-17"
-            ],
-            "dist_from_prev": 2.1
-          },
-          {
-            "name": "九品寺幼稚園",
-            "cat": "保育",
-            "lat": 35.311146,
-            "lng": 136.802643,
-            "students": [
-              "1-5-5"
-            ],
-            "dist_from_prev": 6.5
-          }
-        ],
-        "total_km": 17.0,
-        "n_companies": 2,
-        "n_students": 3
+        "n_students": 7,
+        "has_15": true
       },
       {
         "teacher": 4,
         "stops": [
-          {
-            "name": "江南市立布袋北保育園",
-            "cat": "保育",
-            "lat": 35.324711,
-            "lng": 136.881989,
-            "students": [
-              "1-5-28"
-            ],
-            "dist_from_prev": 1.3
-          },
           {
             "name": "福玉ロジスティクス株式会社　大口センター",
             "cat": "物流",
@@ -620,7 +609,7 @@
               "2-4-18",
               "2-4-25"
             ],
-            "dist_from_prev": 1.5
+            "dist_from_prev": 2.1
           },
           {
             "name": "株式会社メイコン　本社",
@@ -633,11 +622,23 @@
               "2-4-24"
             ],
             "dist_from_prev": 2.5
+          },
+          {
+            "name": "東名化学工業株式会社　小牧工場",
+            "cat": "製造工業",
+            "lat": 35.301033,
+            "lng": 137.002777,
+            "students": [
+              "2-3-8",
+              "2-3-13"
+            ],
+            "dist_from_prev": 10.7
           }
         ],
-        "total_km": 9.9,
+        "total_km": 26.1,
         "n_companies": 3,
-        "n_students": 6
+        "n_students": 7,
+        "has_15": false
       }
     ]
   },
@@ -676,7 +677,8 @@
         ],
         "total_km": 7.4,
         "n_companies": 2,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       },
       {
         "teacher": 2,
@@ -716,7 +718,8 @@
         ],
         "total_km": 8.5,
         "n_companies": 3,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       },
       {
         "teacher": 3,
@@ -757,7 +760,8 @@
         ],
         "total_km": 7.9,
         "n_companies": 3,
-        "n_students": 6
+        "n_students": 6,
+        "has_15": false
       }
     ]
   },
@@ -808,7 +812,8 @@
         ],
         "total_km": 8.7,
         "n_companies": 3,
-        "n_students": 8
+        "n_students": 8,
+        "has_15": false
       },
       {
         "teacher": 2,
@@ -837,7 +842,8 @@
         ],
         "total_km": 9.6,
         "n_companies": 2,
-        "n_students": 3
+        "n_students": 3,
+        "has_15": false
       },
       {
         "teacher": 3,
@@ -867,7 +873,8 @@
         ],
         "total_km": 27.0,
         "n_companies": 2,
-        "n_students": 4
+        "n_students": 4,
+        "has_15": false
       }
     ]
   },
@@ -905,7 +912,8 @@
         ],
         "total_km": 8.6,
         "n_companies": 2,
-        "n_students": 4
+        "n_students": 4,
+        "has_15": false
       },
       {
         "teacher": 2,
@@ -945,7 +953,8 @@
         ],
         "total_km": 19.1,
         "n_companies": 3,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       },
       {
         "teacher": 3,
@@ -964,7 +973,8 @@
         ],
         "total_km": 15.5,
         "n_companies": 1,
-        "n_students": 2
+        "n_students": 2,
+        "has_15": false
       },
       {
         "teacher": 4,
@@ -995,7 +1005,8 @@
         ],
         "total_km": 38.7,
         "n_companies": 2,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       }
     ]
   },
@@ -1044,7 +1055,8 @@
         ],
         "total_km": 20.5,
         "n_companies": 3,
-        "n_students": 6
+        "n_students": 6,
+        "has_15": false
       },
       {
         "teacher": 2,
@@ -1084,7 +1096,8 @@
         ],
         "total_km": 18.3,
         "n_companies": 3,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       }
     ]
   },
@@ -1123,7 +1136,8 @@
         ],
         "total_km": 7.0,
         "n_companies": 2,
-        "n_students": 5
+        "n_students": 5,
+        "has_15": false
       }
     ]
   }

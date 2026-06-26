@@ -83,7 +83,7 @@ function renderDay(day){
       <div class="route-header">
         <div class="teacher-badge" style="background:${color}">T${route.teacher}</div>
         <div>
-          <div class="route-title">教員 ${route.teacher}</div>
+          <div class="route-title">教員 ${route.teacher}${route.has_15?' <span style="background:#f39c12;color:#fff;font-size:0.7rem;padding:1px 6px;border-radius:10px;margin-left:4px">1-5担当</span>':''}</div>
           <div class="route-meta">${route.n_companies}社 / ${route.n_students}名 / 計${route.total_km}km</div>
         </div>
       </div>
@@ -119,7 +119,7 @@ function renderDay(day){
     route.stops.forEach((stop,si)=>{
       const icon = L.divIcon({
         className:'',
-        html:`<div style="background:${color};color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;box-shadow:0 2px 4px rgba(0,0,0,0.3);border:2px solid #fff">${si+1}</div>`,
+        html:`<div style="background:${color};color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;box-shadow:0 2px 4px rgba(0,0,0,0.3);border:2px solid #fff">${si+1}${stop.students.some(s=>s.startsWith('1-5-'))?'<span style="position:absolute;top:-5px;right:-5px;font-size:8px">⭐</span>':''}</div>`,
         iconSize:[22,22], iconAnchor:[11,11]
       });
       const m = L.marker([stop.lat, stop.lng], {icon}).addTo(map);
