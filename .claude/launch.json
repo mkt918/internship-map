@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "assign-manual",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8932"],
+      "port": 8932
+    }
+  ]
+}

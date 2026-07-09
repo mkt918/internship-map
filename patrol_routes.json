@@ -3,7 +3,7 @@
     "date": "7/27(月)",
     "n_companies": 8,
     "n_students": 13,
-    "n_teachers": 4,
+    "n_teachers": 3,
     "routes": [
       {
         "teacher": 1,
@@ -17,6 +17,10 @@
               "1-5-9",
               "1-5-10"
             ],
+            "student_names": [
+              "加藤　いづみ",
+              "河野　叶夢"
+            ],
             "dist_from_prev": 1.8
           },
           {
@@ -26,6 +30,9 @@
             "lng": 136.852081,
             "students": [
               "1-5-26"
+            ],
+            "student_names": [
+              "丹羽　悠"
             ],
             "dist_from_prev": 1.9
           },
@@ -38,13 +45,16 @@
               "1-5-30",
               "1-5-40"
             ],
+            "student_names": [
+              "林　優花",
+              "渡邊　凛音"
+            ],
             "dist_from_prev": 5.8
           }
         ],
         "total_km": 14.1,
         "n_companies": 3,
-        "n_students": 5,
-        "has_15": true
+        "n_students": 5
       },
       {
         "teacher": 2,
@@ -58,6 +68,10 @@
               "1-5-17",
               "2-1-11"
             ],
+            "student_names": [
+              "鈴木　紗柚",
+              "佐川　紅葉"
+            ],
             "dist_from_prev": 1.1
           },
           {
@@ -69,13 +83,16 @@
               "1-5-20",
               "1-5-21"
             ],
+            "student_names": [
+              "高山　美波",
+              "田代　あや"
+            ],
             "dist_from_prev": 2.4
           }
         ],
         "total_km": 5.8,
         "n_companies": 2,
-        "n_students": 4,
-        "has_15": true
+        "n_students": 4
       },
       {
         "teacher": 3,
@@ -89,6 +106,10 @@
               "2-1-6",
               "2-1-13"
             ],
+            "student_names": [
+              "鵜飼　里桜",
+              "杉本　愛奈"
+            ],
             "dist_from_prev": 2.4
           },
           {
@@ -99,17 +120,11 @@
             "students": [
               "2-1-36"
             ],
+            "student_names": [
+              "吉本　衣織"
+            ],
             "dist_from_prev": 3.4
-          }
-        ],
-        "total_km": 9.3,
-        "n_companies": 2,
-        "n_students": 3,
-        "has_15": false
-      },
-      {
-        "teacher": 4,
-        "stops": [
+          },
           {
             "name": "GARN（ガルン）　モゾワンダーシティ店",
             "cat": "販売",
@@ -118,13 +133,15 @@
             "students": [
               "2-4-1"
             ],
-            "dist_from_prev": 12.1
+            "student_names": [
+              "岩崎　なる"
+            ],
+            "dist_from_prev": 14.3
           }
         ],
-        "total_km": 24.2,
-        "n_companies": 1,
-        "n_students": 1,
-        "has_15": false
+        "total_km": 32.1,
+        "n_companies": 3,
+        "n_students": 4
       }
     ]
   },
@@ -145,6 +162,9 @@
             "students": [
               "1-5-8"
             ],
+            "student_names": [
+              "カイレス　カウアン"
+            ],
             "dist_from_prev": 2.0
           },
           {
@@ -156,13 +176,16 @@
               "1-5-29",
               "1-5-37"
             ],
+            "student_names": [
+              "長谷川　璃央",
+              "湯浅　怜"
+            ],
             "dist_from_prev": 1.8
           }
         ],
         "total_km": 6.1,
         "n_companies": 2,
-        "n_students": 3,
-        "has_15": true
+        "n_students": 3
       },
       {
         "teacher": 2,
@@ -176,6 +199,10 @@
               "1-5-16",
               "1-5-19"
             ],
+            "student_names": [
+              "鈴木　琴梨",
+              "髙木　梨緒奈"
+            ],
             "dist_from_prev": 2.6
           },
           {
@@ -186,6 +213,10 @@
             "students": [
               "1-5-12",
               "1-5-14"
+            ],
+            "student_names": [
+              "近藤　瑠香",
+              "沢田　芽衣奈"
             ],
             "dist_from_prev": 1.9
           },
@@ -198,13 +229,16 @@
               "1-5-7",
               "1-5-15"
             ],
+            "student_names": [
+              "小倉　美紅",
+              "清水　栞那"
+            ],
             "dist_from_prev": 2.1
           }
         ],
         "total_km": 11.0,
         "n_companies": 3,
-        "n_students": 6,
-        "has_15": true
+        "n_students": 6
       },
       {
         "teacher": 3,
@@ -217,6 +251,9 @@
             "students": [
               "2-2-13"
             ],
+            "student_names": [
+              "橋本　舞"
+            ],
             "dist_from_prev": 3.6
           },
           {
@@ -228,21 +265,24 @@
               "2-1-15",
               "2-4-20"
             ],
+            "student_names": [
+              "高野　莉花",
+              "長谷川　心海"
+            ],
             "dist_from_prev": 14.3
           }
         ],
         "total_km": 28.7,
         "n_companies": 2,
-        "n_students": 3,
-        "has_15": false
+        "n_students": 3
       }
     ]
   },
   {
     "date": "7/29(水)",
-    "n_companies": 9,
-    "n_students": 15,
-    "n_teachers": 5,
+    "n_companies": 8,
+    "n_students": 14,
+    "n_teachers": 4,
     "routes": [
       {
         "teacher": 1,
@@ -255,13 +295,15 @@
             "students": [
               "1-5-27"
             ],
+            "student_names": [
+              "丹羽　福寧"
+            ],
             "dist_from_prev": 8.6
           }
         ],
         "total_km": 17.3,
         "n_companies": 1,
-        "n_students": 1,
-        "has_15": true
+        "n_students": 1
       },
       {
         "teacher": 2,
@@ -274,6 +316,9 @@
             "students": [
               "1-5-35"
             ],
+            "student_names": [
+              "森　莞介"
+            ],
             "dist_from_prev": 2.0
           },
           {
@@ -284,6 +329,10 @@
             "students": [
               "1-5-4",
               "1-5-22"
+            ],
+            "student_names": [
+              "岩田　真奈",
+              "舘　ひゆか"
             ],
             "dist_from_prev": 1.8
           },
@@ -296,13 +345,16 @@
               "1-5-11",
               "1-5-13"
             ],
+            "student_names": [
+              "駒田　ひな",
+              "佐々　碧美"
+            ],
             "dist_from_prev": 1.5
           }
         ],
         "total_km": 7.7,
         "n_companies": 3,
-        "n_students": 5,
-        "has_15": true
+        "n_students": 5
       },
       {
         "teacher": 3,
@@ -316,6 +368,10 @@
               "2-1-21",
               "2-2-4"
             ],
+            "student_names": [
+              "破石　愛実",
+              "大島　蓮"
+            ],
             "dist_from_prev": 2.9
           },
           {
@@ -326,13 +382,15 @@
             "students": [
               "2-2-20"
             ],
+            "student_names": [
+              "吉田　恩頼"
+            ],
             "dist_from_prev": 2.2
           }
         ],
         "total_km": 8.6,
         "n_companies": 2,
-        "n_students": 3,
-        "has_15": false
+        "n_students": 3
       },
       {
         "teacher": 4,
@@ -346,10 +404,14 @@
               "2-2-14",
               "2-4-21"
             ],
+            "student_names": [
+              "原田　アマンダ",
+              "馬場　羽音"
+            ],
             "dist_from_prev": 1.1
           },
           {
-            "name": "キムラユニティー株式会社　犬山工場（調整中）",
+            "name": "キムラユニティー株式会社　犬山工場",
             "cat": "物流",
             "lat": 35.329754,
             "lng": 136.943909,
@@ -358,32 +420,17 @@
               "2-1-19",
               "2-4-14"
             ],
+            "student_names": [
+              "青木　唯",
+              "中田　俊哉",
+              "清水　愛里"
+            ],
             "dist_from_prev": 4.4
           }
         ],
         "total_km": 10.3,
         "n_companies": 2,
-        "n_students": 5,
-        "has_15": false
-      },
-      {
-        "teacher": 5,
-        "stops": [
-          {
-            "name": "GARN（ガルン）　モゾワンダーシティ店",
-            "cat": "販売",
-            "lat": 35.225266,
-            "lng": 136.883301,
-            "students": [
-              "2-4-11"
-            ],
-            "dist_from_prev": 12.1
-          }
-        ],
-        "total_km": 24.2,
-        "n_companies": 1,
-        "n_students": 1,
-        "has_15": false
+        "n_students": 5
       }
     ]
   },
@@ -391,72 +438,10 @@
     "date": "7/30(木)",
     "n_companies": 8,
     "n_students": 21,
-    "n_teachers": 4,
+    "n_teachers": 3,
     "routes": [
       {
         "teacher": 1,
-        "stops": [
-          {
-            "name": "江南市立藤里保育園",
-            "cat": "保育",
-            "lat": 35.352188,
-            "lng": 136.85791,
-            "students": [
-              "2-4-7"
-            ],
-            "dist_from_prev": 3.6
-          }
-        ],
-        "total_km": 7.2,
-        "n_companies": 1,
-        "n_students": 1,
-        "has_15": false
-      },
-      {
-        "teacher": 2,
-        "stops": [
-          {
-            "name": "江南市立古知野中保育園",
-            "cat": "保育",
-            "lat": 35.342247,
-            "lng": 136.870865,
-            "students": [
-              "1-5-18",
-              "1-5-39",
-              "2-4-3"
-            ],
-            "dist_from_prev": 2.0
-          },
-          {
-            "name": "江南市立古知野西保育園",
-            "cat": "保育",
-            "lat": 35.334476,
-            "lng": 136.852432,
-            "students": [
-              "1-5-2",
-              "1-5-32"
-            ],
-            "dist_from_prev": 1.9
-          },
-          {
-            "name": "ガレ・ドゥ・ワタナベ",
-            "cat": "製造食品, 販売",
-            "lat": 35.313831,
-            "lng": 136.878494,
-            "students": [
-              "1-5-33",
-              "1-5-38"
-            ],
-            "dist_from_prev": 3.3
-          }
-        ],
-        "total_km": 9.7,
-        "n_companies": 3,
-        "n_students": 7,
-        "has_15": true
-      },
-      {
-        "teacher": 3,
         "stops": [
           {
             "name": "江南市立古知野東保育園",
@@ -466,6 +451,10 @@
             "students": [
               "1-5-3",
               "1-5-31"
+            ],
+            "student_names": [
+              "今泉　美南",
+              "松井　結愛"
             ],
             "dist_from_prev": 1.6
           },
@@ -477,6 +466,10 @@
             "students": [
               "1-5-36",
               "2-2-8"
+            ],
+            "student_names": [
+              "森　こころ",
+              "北川　晃羽"
             ],
             "dist_from_prev": 2.1
           },
@@ -492,17 +485,91 @@
               "2-3-11",
               "2-3-17"
             ],
+            "student_names": [
+              "大西　彩愛",
+              "水田　愛弓",
+              "水谷　心春",
+              "藤　愛留",
+              "矢田　六花"
+            ],
             "dist_from_prev": 6.3
           }
         ],
         "total_km": 14.9,
         "n_companies": 3,
-        "n_students": 9,
-        "has_15": true
+        "n_students": 9
       },
       {
-        "teacher": 4,
+        "teacher": 2,
         "stops": [
+          {
+            "name": "江南市立古知野中保育園",
+            "cat": "保育",
+            "lat": 35.342247,
+            "lng": 136.870865,
+            "students": [
+              "1-5-18",
+              "1-5-39",
+              "2-4-3"
+            ],
+            "student_names": [
+              "仙田　舞緒",
+              "米倉　陽斗",
+              "岩田　苺子"
+            ],
+            "dist_from_prev": 2.0
+          },
+          {
+            "name": "江南市立古知野西保育園",
+            "cat": "保育",
+            "lat": 35.334476,
+            "lng": 136.852432,
+            "students": [
+              "1-5-2",
+              "1-5-32"
+            ],
+            "student_names": [
+              "茨木　まつり",
+              "松尾　実里"
+            ],
+            "dist_from_prev": 1.9
+          },
+          {
+            "name": "ガレ・ドゥ・ワタナベ",
+            "cat": "製造食品, 販売",
+            "lat": 35.313831,
+            "lng": 136.878494,
+            "students": [
+              "1-5-33",
+              "1-5-38"
+            ],
+            "student_names": [
+              "丸山　莉奈",
+              "吉村　佳於実"
+            ],
+            "dist_from_prev": 3.3
+          }
+        ],
+        "total_km": 9.7,
+        "n_companies": 3,
+        "n_students": 7
+      },
+      {
+        "teacher": 3,
+        "stops": [
+          {
+            "name": "江南市立藤里保育園",
+            "cat": "保育",
+            "lat": 35.352188,
+            "lng": 136.85791,
+            "students": [
+              "2-4-7"
+            ],
+            "student_names": [
+              "奥山　璃音"
+            ],
+            "dist_from_prev": 3.6
+          },
           {
             "name": "ＮＸキャッシュ・ロジスティクス株式会社　中部支店",
             "cat": "物流",
@@ -514,21 +581,26 @@
               "2-2-15",
               "2-4-12"
             ],
-            "dist_from_prev": 20.3
+            "student_names": [
+              "笹山　伶華",
+              "中野　妃織",
+              "半谷　健",
+              "小澤　奏太"
+            ],
+            "dist_from_prev": 22.0
           }
         ],
-        "total_km": 40.6,
-        "n_companies": 1,
-        "n_students": 4,
-        "has_15": false
+        "total_km": 45.9,
+        "n_companies": 2,
+        "n_students": 5
       }
     ]
   },
   {
     "date": "7/31(金)",
-    "n_companies": 9,
+    "n_companies": 10,
     "n_students": 20,
-    "n_teachers": 4,
+    "n_teachers": 5,
     "routes": [
       {
         "teacher": 1,
@@ -541,6 +613,9 @@
             "students": [
               "1-5-28"
             ],
+            "student_names": [
+              "納富　ももな"
+            ],
             "dist_from_prev": 1.3
           },
           {
@@ -552,6 +627,10 @@
               "1-5-23",
               "2-1-17"
             ],
+            "student_names": [
+              "田本　美優",
+              "竹田　愛美"
+            ],
             "dist_from_prev": 1.8
           },
           {
@@ -562,13 +641,15 @@
             "students": [
               "1-5-5"
             ],
+            "student_names": [
+              "内田　釉亜"
+            ],
             "dist_from_prev": 6.5
           }
         ],
         "total_km": 18.0,
         "n_companies": 3,
-        "n_students": 4,
-        "has_15": true
+        "n_students": 4
       },
       {
         "teacher": 2,
@@ -579,27 +660,17 @@
             "lat": 35.298954,
             "lng": 136.94664,
             "students": [
-              "1-5-34",
-              "2-4-22"
+              "1-5-34"
+            ],
+            "student_names": [
+              "毛利　虹都"
             ],
             "dist_from_prev": 6.4
-          },
-          {
-            "name": "東名化学工業株式会社　小牧工場",
-            "cat": "製造工業",
-            "lat": 35.301033,
-            "lng": 137.002777,
-            "students": [
-              "2-3-8",
-              "2-3-13"
-            ],
-            "dist_from_prev": 5.1
           }
         ],
-        "total_km": 22.3,
-        "n_companies": 2,
-        "n_students": 4,
-        "has_15": true
+        "total_km": 12.8,
+        "n_companies": 1,
+        "n_students": 1
       },
       {
         "teacher": 3,
@@ -616,6 +687,13 @@
               "2-3-12",
               "2-3-15"
             ],
+            "student_names": [
+              "長井　柚香",
+              "村瀬　常行",
+              "山崎　尊生",
+              "藤井　玖典",
+              "松山　響"
+            ],
             "dist_from_prev": 2.8
           },
           {
@@ -627,13 +705,16 @@
               "1-5-1",
               "1-5-25"
             ],
+            "student_names": [
+              "浅野　心馨",
+              "長坂　奈々美"
+            ],
             "dist_from_prev": 1.3
           }
         ],
         "total_km": 8.3,
         "n_companies": 2,
-        "n_students": 7,
-        "has_15": true
+        "n_students": 7
       },
       {
         "teacher": 4,
@@ -647,6 +728,10 @@
               "2-4-18",
               "2-4-25"
             ],
+            "student_names": [
+              "鈴木　李望",
+              "松川　怜央"
+            ],
             "dist_from_prev": 2.1
           },
           {
@@ -659,24 +744,35 @@
               "2-2-6",
               "2-4-24"
             ],
+            "student_names": [
+              "髙木　琢也",
+              "亀島　花南",
+              "松尾　英治"
+            ],
             "dist_from_prev": 2.5
+          },
+          {
+            "name": "東名化学工業株式会社　小牧工場",
+            "cat": "製造工業",
+            "lat": 35.301033,
+            "lng": 137.002777,
+            "students": [
+              "2-3-8",
+              "2-3-13"
+            ],
+            "student_names": [
+              "木下　夢萌",
+              "舟渡　駿"
+            ],
+            "dist_from_prev": 10.7
           }
         ],
-        "total_km": 9.2,
-        "n_companies": 2,
-        "n_students": 5,
-        "has_15": false
-      }
-    ]
-  },
-  {
-    "date": "8/24(月)",
-    "n_companies": 8,
-    "n_students": 16,
-    "n_teachers": 3,
-    "routes": [
+        "total_km": 26.1,
+        "n_companies": 3,
+        "n_students": 7
+      },
       {
-        "teacher": 1,
+        "teacher": 5,
         "stops": [
           {
             "name": "江南市立古知野東保育園",
@@ -684,11 +780,58 @@
             "lat": 35.34539,
             "lng": 136.880692,
             "students": [
-              "2-1-5",
+              "2-4-22"
+            ],
+            "student_names": [
+              "伴　結月"
+            ],
+            "dist_from_prev": 1.6
+          }
+        ],
+        "total_km": 3.2,
+        "n_companies": 1,
+        "n_students": 1
+      }
+    ]
+  },
+  {
+    "date": "8/24(月)",
+    "n_companies": 8,
+    "n_students": 14,
+    "n_teachers": 3,
+    "routes": [
+      {
+        "teacher": 1,
+        "stops": [
+          {
+            "name": "美容室ISA",
+            "cat": "美容",
+            "lat": 35.330742,
+            "lng": 136.905304,
+            "students": [
+              "2-1-33",
+              "2-3-18"
+            ],
+            "student_names": [
+              "山田　結愛",
+              "横井　彩凪"
+            ],
+            "dist_from_prev": 1.4
+          },
+          {
+            "name": "江南市立古知野東保育園",
+            "cat": "保育",
+            "lat": 35.34539,
+            "lng": 136.880692,
+            "students": [
               "2-4-5",
               "2-4-26"
             ],
-            "dist_from_prev": 1.6
+            "student_names": [
+              "江崎　未空",
+              "宮下　守楽"
+            ],
+            "dist_from_prev": 2.8
           },
           {
             "name": "江南市立小鹿保育園",
@@ -699,13 +842,16 @@
               "2-3-1",
               "2-4-27"
             ],
+            "student_names": [
+              "石田　柚樹",
+              "宮本　佑亜"
+            ],
             "dist_from_prev": 2.1
           }
         ],
-        "total_km": 7.4,
-        "n_companies": 2,
-        "n_students": 5,
-        "has_15": false
+        "total_km": 9.9,
+        "n_companies": 3,
+        "n_students": 6
       },
       {
         "teacher": 2,
@@ -719,6 +865,10 @@
               "2-4-2",
               "2-4-4"
             ],
+            "student_names": [
+              "岩田　志帆",
+              "岩田　理緒"
+            ],
             "dist_from_prev": 1.8
           },
           {
@@ -730,6 +880,10 @@
               "2-1-3",
               "2-3-3"
             ],
+            "student_names": [
+              "伊藤　陽向",
+              "井上　颯斗"
+            ],
             "dist_from_prev": 1.3
           },
           {
@@ -740,28 +894,19 @@
             "students": [
               "2-4-8"
             ],
+            "student_names": [
+              "兼松　沙也恵"
+            ],
             "dist_from_prev": 1.9
           }
         ],
         "total_km": 8.5,
         "n_companies": 3,
-        "n_students": 5,
-        "has_15": false
+        "n_students": 5
       },
       {
         "teacher": 3,
         "stops": [
-          {
-            "name": "美容室ISA",
-            "cat": "美容",
-            "lat": 35.330742,
-            "lng": 136.905304,
-            "students": [
-              "2-1-33",
-              "2-3-18"
-            ],
-            "dist_from_prev": 1.4
-          },
           {
             "name": "福玉米粒麦株式会社",
             "cat": "製造工業",
@@ -771,7 +916,11 @@
               "2-1-22",
               "2-2-1"
             ],
-            "dist_from_prev": 3.3
+            "student_names": [
+              "濱　時光",
+              "阿部　秀樹"
+            ],
+            "dist_from_prev": 2.5
           },
           {
             "name": "江南市立布袋保育園",
@@ -779,16 +928,17 @@
             "lat": 35.315956,
             "lng": 136.869095,
             "students": [
-              "2-1-16",
               "2-2-12"
+            ],
+            "student_names": [
+              "長屋　未羽"
             ],
             "dist_from_prev": 0.4
           }
         ],
-        "total_km": 7.9,
-        "n_companies": 3,
-        "n_students": 6,
-        "has_15": false
+        "total_km": 5.7,
+        "n_companies": 2,
+        "n_students": 3
       }
     ]
   },
@@ -810,6 +960,10 @@
               "2-3-10",
               "2-4-13"
             ],
+            "student_names": [
+              "永田　絢楓",
+              "佐々　輝夏"
+            ],
             "dist_from_prev": 1.1
           },
           {
@@ -821,6 +975,11 @@
               "2-1-34",
               "2-1-35",
               "2-4-29"
+            ],
+            "student_names": [
+              "山本　周馬",
+              "山本　凛太朗",
+              "横地　杏月"
             ],
             "dist_from_prev": 1.9
           },
@@ -834,13 +993,17 @@
               "2-2-3",
               "2-2-5"
             ],
+            "student_names": [
+              "江端　彩花",
+              "今井　悠人",
+              "尾関　隼多"
+            ],
             "dist_from_prev": 3.6
           }
         ],
         "total_km": 8.7,
         "n_companies": 3,
-        "n_students": 8,
-        "has_15": false
+        "n_students": 8
       },
       {
         "teacher": 2,
@@ -854,6 +1017,10 @@
               "2-1-18",
               "2-4-6"
             ],
+            "student_names": [
+              "土屋　紗織",
+              "大藪　香菜"
+            ],
             "dist_from_prev": 3.8
           },
           {
@@ -864,13 +1031,15 @@
             "students": [
               "2-1-2"
             ],
+            "student_names": [
+              "市村　都胡"
+            ],
             "dist_from_prev": 1.7
           }
         ],
         "total_km": 9.6,
         "n_companies": 2,
-        "n_students": 3,
-        "has_15": false
+        "n_students": 3
       },
       {
         "teacher": 3,
@@ -884,6 +1053,10 @@
               "2-2-2",
               "2-2-18"
             ],
+            "student_names": [
+              "和泉　遥斗",
+              "藤井　瞳伍"
+            ],
             "dist_from_prev": 7.2
           },
           {
@@ -895,13 +1068,16 @@
               "2-1-10",
               "2-1-31"
             ],
+            "student_names": [
+              "佐伯　大介",
+              "安井　音色"
+            ],
             "dist_from_prev": 8.9
           }
         ],
         "total_km": 27.0,
         "n_companies": 2,
-        "n_students": 4,
-        "has_15": false
+        "n_students": 4
       }
     ]
   },
@@ -923,6 +1099,10 @@
               "2-1-9",
               "2-1-20"
             ],
+            "student_names": [
+              "喜多川　美優",
+              "中村　有沙"
+            ],
             "dist_from_prev": 2.9
           },
           {
@@ -934,13 +1114,16 @@
               "2-1-24",
               "2-2-10"
             ],
+            "student_names": [
+              "前畑　ひなた",
+              "髙橋　潤夏"
+            ],
             "dist_from_prev": 2.9
           }
         ],
         "total_km": 8.6,
         "n_companies": 2,
-        "n_students": 4,
-        "has_15": false
+        "n_students": 4
       },
       {
         "teacher": 2,
@@ -954,6 +1137,10 @@
               "2-2-7",
               "2-3-16"
             ],
+            "student_names": [
+              "川野　鈴音",
+              "水野　瑠斗"
+            ],
             "dist_from_prev": 7.2
           },
           {
@@ -963,6 +1150,9 @@
             "lng": 136.82579,
             "students": [
               "2-1-26"
+            ],
+            "student_names": [
+              "間宮　千夏"
             ],
             "dist_from_prev": 0.7
           },
@@ -975,13 +1165,16 @@
               "2-1-8",
               "2-4-9"
             ],
+            "student_names": [
+              "川本　唯月",
+              "橘川　汐穏"
+            ],
             "dist_from_prev": 2.8
           }
         ],
         "total_km": 19.1,
         "n_companies": 3,
-        "n_students": 5,
-        "has_15": false
+        "n_students": 5
       },
       {
         "teacher": 3,
@@ -995,13 +1188,16 @@
               "2-1-25",
               "2-4-28"
             ],
+            "student_names": [
+              "増田　結衣",
+              "武藤　弓葵"
+            ],
             "dist_from_prev": 7.8
           }
         ],
         "total_km": 15.5,
         "n_companies": 1,
-        "n_students": 2,
-        "has_15": false
+        "n_students": 2
       },
       {
         "teacher": 4,
@@ -1015,10 +1211,14 @@
               "2-1-12",
               "2-4-10"
             ],
+            "student_names": [
+              "佐藤　優羽",
+              "倉知　万結"
+            ],
             "dist_from_prev": 7.1
           },
           {
-            "name": "アイカテック建材株式会社名古屋工場　※安全靴貸出のためサイズを要連絡",
+            "name": "アイカテック建材株式会社名古屋工場",
             "cat": "製造工業",
             "lat": 35.188705,
             "lng": 136.809784,
@@ -1027,13 +1227,17 @@
               "2-3-19",
               "2-4-17"
             ],
+            "student_names": [
+              "奥西　楓威",
+              "吉川　巧",
+              "杉山　暁音"
+            ],
             "dist_from_prev": 13.9
           }
         ],
         "total_km": 38.7,
         "n_companies": 2,
-        "n_students": 5,
-        "has_15": false
+        "n_students": 5
       }
     ]
   },
@@ -1055,6 +1259,10 @@
               "2-4-15",
               "2-4-19"
             ],
+            "student_names": [
+              "杉野　百香",
+              "永田　結梨"
+            ],
             "dist_from_prev": 1.7
           },
           {
@@ -1065,6 +1273,10 @@
             "students": [
               "2-1-30",
               "2-2-19"
+            ],
+            "student_names": [
+              "村瀬　はるか",
+              "水野　心瑚"
             ],
             "dist_from_prev": 1.1
           },
@@ -1077,13 +1289,16 @@
               "2-3-14",
               "2-4-16"
             ],
+            "student_names": [
+              "松枝　沙空",
+              "杉原　良聡"
+            ],
             "dist_from_prev": 9.9
           }
         ],
         "total_km": 20.5,
         "n_companies": 3,
-        "n_students": 6,
-        "has_15": false
+        "n_students": 6
       },
       {
         "teacher": 2,
@@ -1097,6 +1312,10 @@
               "2-3-6",
               "2-4-23"
             ],
+            "student_names": [
+              "河井　奏音",
+              "日野　彩音"
+            ],
             "dist_from_prev": 2.9
           },
           {
@@ -1108,6 +1327,10 @@
               "2-2-16",
               "2-3-7"
             ],
+            "student_names": [
+              "菱川　優奈",
+              "北瀬　未留"
+            ],
             "dist_from_prev": 5.0
           },
           {
@@ -1118,13 +1341,15 @@
             "students": [
               "2-2-17"
             ],
+            "student_names": [
+              "藤井　来娃"
+            ],
             "dist_from_prev": 1.8
           }
         ],
         "total_km": 18.3,
         "n_companies": 3,
-        "n_students": 5,
-        "has_15": false
+        "n_students": 5
       }
     ]
   },
@@ -1145,6 +1370,9 @@
             "students": [
               "2-1-23"
             ],
+            "student_names": [
+              "繁昌　心春"
+            ],
             "dist_from_prev": 1.3
           },
           {
@@ -1158,13 +1386,18 @@
               "2-3-4",
               "2-3-9"
             ],
+            "student_names": [
+              "岩田　妃里",
+              "磯部　由稀",
+              "岩田　煌叶",
+              "後藤　颯太"
+            ],
             "dist_from_prev": 3.3
           }
         ],
         "total_km": 7.0,
         "n_companies": 2,
-        "n_students": 5,
-        "has_15": false
+        "n_students": 5
       }
     ]
   }

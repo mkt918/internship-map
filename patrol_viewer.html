@@ -92,7 +92,10 @@ function renderDay(day){
     const stopList = document.createElement('div');
     stopList.innerHTML = `<div class="leg">🏫 ${SCHOOL_NAME} 出発</div>`;
     route.stops.forEach((stop,si)=>{
-      const stuStr = stop.students.join(', ');
+      const stuStr = stop.students.map((sid,i)=>{
+        const nm = (stop.student_names && stop.student_names[i]) ? stop.student_names[i] : '';
+        return nm ? `${sid}(${nm})` : sid;
+      }).join(', ');
       stopList.innerHTML += `
         <div class="stop">
           <div class="stop-num" style="background:${color}">${si+1}</div>
