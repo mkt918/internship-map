@@ -46,6 +46,9 @@ with open(BASE + r'\生徒名簿DB.csv', encoding='utf-8-sig') as f:
             '事前説明2': (r.get('事前説明２') or '').strip(),
             '事前説明1業種': (r.get('事前説明1業種') or '').strip(),
             '事前説明2業種': (r.get('事前説明2業種') or '').strip(),
+            '第1希望業種': (r.get('第1希望業種') or '').strip(),
+            '第2希望業種': (r.get('第2希望業種') or '').strip(),
+            '第3希望業種': (r.get('第3希望業種') or '').strip(),
             '最寄り駅DB': (r.get('最寄り駅') or '').strip(),
         }
 
@@ -103,10 +106,11 @@ with open(BASE + r'\260710_生徒データ.csv', encoding='utf-8-sig') as f:
         machi = ''
         eki = canon_eki(se.get('最寄り駅DB', ''))
 
-        p1 = norm_pref(row.get('第１希望') if '第１希望' in row else '')
-        # 260710データには第1〜3希望列が無いため roster DB 側の希望は使わず、
-        # 事前説明のみでマッチ判定する
-        p1 = p2 = p3 = ''
+        # 260710データには第1〜3希望列が無いため、生徒名簿DB側の正規化済み希望業種を使う
+        se_pref = stu_extra.get((nen, kumi, ban), {})
+        p1 = se_pref.get('第1希望業種', '')
+        p2 = se_pref.get('第2希望業種', '')
+        p3 = se_pref.get('第3希望業種', '')
 
         comp = find_comp(no_raw, cname)
         if comp:
