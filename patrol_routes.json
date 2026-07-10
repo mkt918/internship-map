@@ -438,10 +438,88 @@
     "date": "7/30(木)",
     "n_companies": 8,
     "n_students": 21,
-    "n_teachers": 3,
+    "n_teachers": 4,
     "routes": [
       {
         "teacher": 1,
+        "stops": [
+          {
+            "name": "江南市立藤里保育園",
+            "cat": "保育",
+            "lat": 35.352188,
+            "lng": 136.85791,
+            "students": [
+              "2-4-7"
+            ],
+            "student_names": [
+              "奥山　璃音"
+            ],
+            "dist_from_prev": 3.6
+          }
+        ],
+        "total_km": 7.2,
+        "n_companies": 1,
+        "n_students": 1,
+        "has_15": false
+      },
+      {
+        "teacher": 2,
+        "stops": [
+          {
+            "name": "江南市立古知野中保育園",
+            "cat": "保育",
+            "lat": 35.342247,
+            "lng": 136.870865,
+            "students": [
+              "1-5-18",
+              "1-5-39",
+              "2-4-3"
+            ],
+            "student_names": [
+              "仙田　舞緒",
+              "米倉　陽斗",
+              "岩田　苺子"
+            ],
+            "dist_from_prev": 2.0
+          },
+          {
+            "name": "江南市立古知野西保育園",
+            "cat": "保育",
+            "lat": 35.334476,
+            "lng": 136.852432,
+            "students": [
+              "1-5-2",
+              "1-5-32"
+            ],
+            "student_names": [
+              "茨木　まつり",
+              "松尾　実里"
+            ],
+            "dist_from_prev": 1.9
+          },
+          {
+            "name": "ガレ・ドゥ・ワタナベ",
+            "cat": "製造食品, 販売",
+            "lat": 35.313831,
+            "lng": 136.878494,
+            "students": [
+              "1-5-33",
+              "1-5-38"
+            ],
+            "student_names": [
+              "丸山　莉奈",
+              "吉村　佳於実"
+            ],
+            "dist_from_prev": 3.3
+          }
+        ],
+        "total_km": 9.7,
+        "n_companies": 3,
+        "n_students": 7,
+        "has_15": true
+      },
+      {
+        "teacher": 3,
         "stops": [
           {
             "name": "江南市立古知野東保育園",
@@ -497,79 +575,12 @@
         ],
         "total_km": 14.9,
         "n_companies": 3,
-        "n_students": 9
+        "n_students": 9,
+        "has_15": true
       },
       {
-        "teacher": 2,
+        "teacher": 4,
         "stops": [
-          {
-            "name": "江南市立古知野中保育園",
-            "cat": "保育",
-            "lat": 35.342247,
-            "lng": 136.870865,
-            "students": [
-              "1-5-18",
-              "1-5-39",
-              "2-4-3"
-            ],
-            "student_names": [
-              "仙田　舞緒",
-              "米倉　陽斗",
-              "岩田　苺子"
-            ],
-            "dist_from_prev": 2.0
-          },
-          {
-            "name": "江南市立古知野西保育園",
-            "cat": "保育",
-            "lat": 35.334476,
-            "lng": 136.852432,
-            "students": [
-              "1-5-2",
-              "1-5-32"
-            ],
-            "student_names": [
-              "茨木　まつり",
-              "松尾　実里"
-            ],
-            "dist_from_prev": 1.9
-          },
-          {
-            "name": "ガレ・ドゥ・ワタナベ",
-            "cat": "製造食品, 販売",
-            "lat": 35.313831,
-            "lng": 136.878494,
-            "students": [
-              "1-5-33",
-              "1-5-38"
-            ],
-            "student_names": [
-              "丸山　莉奈",
-              "吉村　佳於実"
-            ],
-            "dist_from_prev": 3.3
-          }
-        ],
-        "total_km": 9.7,
-        "n_companies": 3,
-        "n_students": 7
-      },
-      {
-        "teacher": 3,
-        "stops": [
-          {
-            "name": "江南市立藤里保育園",
-            "cat": "保育",
-            "lat": 35.352188,
-            "lng": 136.85791,
-            "students": [
-              "2-4-7"
-            ],
-            "student_names": [
-              "奥山　璃音"
-            ],
-            "dist_from_prev": 3.6
-          },
           {
             "name": "ＮＸキャッシュ・ロジスティクス株式会社　中部支店",
             "cat": "物流",
@@ -587,12 +598,13 @@
               "半谷　健",
               "小澤　奏太"
             ],
-            "dist_from_prev": 22.0
+            "dist_from_prev": 20.3
           }
         ],
-        "total_km": 45.9,
-        "n_companies": 2,
-        "n_students": 5
+        "total_km": 40.6,
+        "n_companies": 1,
+        "n_students": 4,
+        "has_15": false
       }
     ]
   },
@@ -600,7 +612,7 @@
     "date": "7/31(金)",
     "n_companies": 10,
     "n_students": 20,
-    "n_teachers": 5,
+    "n_teachers": 4,
     "routes": [
       {
         "teacher": 1,
@@ -649,7 +661,8 @@
         ],
         "total_km": 18.0,
         "n_companies": 3,
-        "n_students": 4
+        "n_students": 4,
+        "has_15": true
       },
       {
         "teacher": 2,
@@ -666,15 +679,44 @@
               "毛利　虹都"
             ],
             "dist_from_prev": 6.4
+          },
+          {
+            "name": "東名化学工業株式会社　小牧工場",
+            "cat": "製造工業",
+            "lat": 35.301033,
+            "lng": 137.002777,
+            "students": [
+              "2-3-8",
+              "2-3-13"
+            ],
+            "student_names": [
+              "木下　夢萌",
+              "舟渡　駿"
+            ],
+            "dist_from_prev": 5.1
           }
         ],
-        "total_km": 12.8,
-        "n_companies": 1,
-        "n_students": 1
+        "total_km": 22.3,
+        "n_companies": 2,
+        "n_students": 3,
+        "has_15": true
       },
       {
         "teacher": 3,
         "stops": [
+          {
+            "name": "江南市立古知野東保育園",
+            "cat": "保育",
+            "lat": 35.34539,
+            "lng": 136.880692,
+            "students": [
+              "2-4-22"
+            ],
+            "student_names": [
+              "伴　結月"
+            ],
+            "dist_from_prev": 1.6
+          },
           {
             "name": "グンゼ江南工場",
             "cat": "製造工業",
@@ -694,7 +736,7 @@
               "藤井　玖典",
               "松山　響"
             ],
-            "dist_from_prev": 2.8
+            "dist_from_prev": 1.3
           },
           {
             "name": "江南市立宮田東保育園",
@@ -712,9 +754,10 @@
             "dist_from_prev": 1.3
           }
         ],
-        "total_km": 8.3,
-        "n_companies": 2,
-        "n_students": 7
+        "total_km": 8.4,
+        "n_companies": 3,
+        "n_students": 8,
+        "has_15": true
       },
       {
         "teacher": 4,
@@ -750,47 +793,12 @@
               "松尾　英治"
             ],
             "dist_from_prev": 2.5
-          },
-          {
-            "name": "東名化学工業株式会社　小牧工場",
-            "cat": "製造工業",
-            "lat": 35.301033,
-            "lng": 137.002777,
-            "students": [
-              "2-3-8",
-              "2-3-13"
-            ],
-            "student_names": [
-              "木下　夢萌",
-              "舟渡　駿"
-            ],
-            "dist_from_prev": 10.7
           }
         ],
-        "total_km": 26.1,
-        "n_companies": 3,
-        "n_students": 7
-      },
-      {
-        "teacher": 5,
-        "stops": [
-          {
-            "name": "江南市立古知野東保育園",
-            "cat": "保育",
-            "lat": 35.34539,
-            "lng": 136.880692,
-            "students": [
-              "2-4-22"
-            ],
-            "student_names": [
-              "伴　結月"
-            ],
-            "dist_from_prev": 1.6
-          }
-        ],
-        "total_km": 3.2,
-        "n_companies": 1,
-        "n_students": 1
+        "total_km": 9.2,
+        "n_companies": 2,
+        "n_students": 5,
+        "has_15": false
       }
     ]
   },
