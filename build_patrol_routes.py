@@ -3,7 +3,7 @@
 教員見回りルート生成スクリプト
 - 日付ごとに企業をクラスタリング（最大4社/教員）
 - 各クラスター内をTSP最近傍法で並べる
-- 学校(江南高校)を出発/帰着点とする
+- 学校(学校)を出発/帰着点とする
 """
 import csv, re, json, random
 from math import radians, sin, cos, sqrt, atan2
@@ -11,9 +11,9 @@ from collections import defaultdict
 
 BASE = r'C:\antigravity\public\00_作業\2026-06\インターンシップ管理'
 
-# 江南高校 座標
+# 学校 座標
 SCHOOL = (35.3338, 136.8908)
-SCHOOL_NAME = '江南高校（出発・帰着）'
+SCHOOL_NAME = '学校（出発・帰着）'
 MAX_PER_TEACHER = 3
 MAX_TEACHERS = 5
 
